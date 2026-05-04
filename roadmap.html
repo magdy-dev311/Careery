@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Careery - Your Roadmap</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style data-purpose="custom-animations">
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .float-animation {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+    <style data-purpose="custom-gradients">
+        .gradient-bg {
+            background: linear-gradient(180deg, #F9FAFB 0%, #FFFFFF 100%);
+        }
+
+        .path-gradient {
+            stroke: url(#line-gradient);
+        }
+
+        .card-shadow {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        }
+        .bg-brand-purple {
+            background-color: #6336c7;
+        }
+        .border-brand-purple {
+            border-color: #6336c7;
+        }
+        .brand-purple {
+            color: #6336c7;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 font-sans text-gray-900">
+    <!-- BEGIN: MainHeader -->
+    <header class="bg-white border-b border-gray-100 py-4 px-8 flex justify-between items-center sticky top-0 z-50">
+        <div class="flex items-center gap-2">
+            <div class="brand-purple font-bold text-2xl tracking-tight">Careery</div>
+        </div>
+        <nav class="flex items-center gap-6">
+            <a class="text-sm font-medium text-gray-600 hover:text-indigo-600" href="#">My Progress</a>
+            <button class="text-gray-400 hover:text-gray-600">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+            </button>
+            <div
+                class="w-10 h-10 bg-brand-purple rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                MZ
+            </div>
+        </nav>
+    </header>
+    <!-- END: MainHeader -->
+    <main class="max-w-5xl mx-auto py-12 px-4 relative">
+        <!-- BEGIN: HeroSection -->
+        <section class="text-center mb-16 relative">
+            <h1 class="text-5xl font-extrabold text-slate-800 mb-4">Your Roadmap</h1>
+            <p class="text-gray-500 max-w-xl mx-auto text-lg leading-relaxed">
+                Follow this curated sequence of learning and building to reach your professional pinnacle.
+            </p>
+            <!-- Progress Card (Floating) -->
+            <div
+                class="absolute top-0 right-0 w-64 bg-white p-5 rounded-2xl card-shadow border border-gray-100 text-left hidden lg:block">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Your Progress</span>
+                    <span class="text-indigo-600 font-bold text-sm">35%</span>
+                </div>
+                <div class="w-full bg-gray-100 h-2 rounded-full mb-3 overflow-hidden">
+                    <div class="bg-indigo-600 h-full rounded-full" style="width: 35%"></div>
+                </div>
+                <p class="text-[11px] text-gray-400 font-medium">3 units remaining until next Step.</p>
+            </div>
+
+
+
+            <!-- BEGIN: StepperIndicator -->
+            <div class="flex-grow container mx-auto max-w-5xl px-4 pt-16">
+                <div class="mb-16 relative" data-purpose="stepper">
+                    <!-- Connection Lines -->
+                    <div class="w-[90%] absolute top-5 left-[5%] right-[15%] h-0.5 bg-gray-200 -z-10"></div>
+                    <div class="flex justify-between items-start">
+                        <!-- Step 1 -->
+                        <div class="flex flex-col items-center gap-3 w-32">
+                            <div
+                                class="w-10 h-10 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center text-gray-400">
+                                <svg class="h-5 w-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path clip-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                                        fill-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest text-center">Step 1:
+                                Explore</span>
+                        </div>
+                        <!-- Step 2 (Active) -->
+                        <div class="flex flex-col items-center gap-3 w-32">
+            
+                            <div
+                                class="w-10 h-10 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center text-gray-400">
+                                <svg class="h-5 w-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                                    <path clip-rule="evenodd"
+                                        d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
+                                        fill-rule="evenodd"></path>
+                                </svg>
+                            </div>
+            
+                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest text-center">Step 2:
+                                Quiz</span>
+            
+                        </div>
+                        <!-- Step 3 -->
+                        <div class="flex flex-col items-center gap-3 w-32">
+                            <div class="w-10 h-10 rounded-full bg-brand-purple flex items-center justify-center text-white shadow-lg">
+                                <svg class="h-5 w-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path clip-rule="evenodd"
+                                        d="M12 1.586l-4 4v12.828l4-4V1.586zM3.707 3.293A1 1 0 002 4v10a1 1 0 00.293.707L6 18.414V5.586L3.707 3.293zM17.707 5.293L14 1.586v12.828l2.293 2.293A1 1 0 0018 16V6a1 1 0 00-.293-.707z"
+                                        fill-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <span class="text-[10px] font-bold brand-purple uppercase tracking-widest text-center">Step 3:
+                                Roadmap</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END: StepperIndicator -->
+
+
+
+        </section>
+        <!-- END: HeroSection -->
+        <!-- BEGIN: RoadmapCanvas -->
+        <section class="relative min-h-[2800px] w-full mt-10" id="roadmap-canvas">
+            <!-- The SVG Path -->
+            <svg class="absolute inset-0 w-full h-full pointer-events-none" fill="none" preserveaspectratio="none"
+                viewbox="0 0 800 2800" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <lineargradient id="line-gradient" x1="0%" x2="0%" y1="0%" y2="100%">
+                        <stop offset="0%" stop-color="#4F46E5"></stop>
+                        <stop offset="60%" stop-color="#4F46E5" stop-opacity="0.5"></stop>
+                        <stop offset="80%" stop-color="#E5E7EB"></stop>
+                        <stop offset="100%" stop-color="#E5E7EB" stop-opacity="0.3"></stop>
+                    </lineargradient>
+                </defs>
+                <!-- Path generated to mimic the winding curve -->
+                <path d="M400,0 
+                 C400,100 450,150 480,200 
+                 C550,300 450,450 550,550
+                 C650,650 300,750 280,950
+                 C250,1200 600,1250 500,1500
+                 C400,1750 250,1800 280,2100
+                 C320,2400 550,2300 500,2700" fill="none" stroke="url(#line-gradient)" stroke-linecap="round"
+                    stroke-width="12"></path>
+            </svg>
+            <!-- Roadmap Nodes and Cards -->
+            <!-- Module 1.1 -->
+            <div class="absolute top-[180px] left-[480px] -translate-x-1/2 flex items-center gap-6">
+                <div
+                    class="w-12 h-12 rounded-full bg-indigo-600 flex items-center justify-center shadow-xl shadow-indigo-200 border-4 border-white z-10">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                </div>
+                <div class="bg-white p-3 rounded-xl card-shadow border border-gray-100 min-w-[180px]">
+                    <span class="text-[8px] font-bold text-indigo-500 uppercase">Module 1.1</span>
+                    <p class="text-xs font-bold text-slate-800">Intro to Design Logic</p>
+                </div>
+            </div>
+            <!-- Module 1.2 -->
+            <div class="absolute top-[400px] left-[550px] -translate-x-1/2 flex items-center flex-row-reverse gap-6">
+                <div
+                    class="w-12 h-12 rounded-full bg-indigo-600 flex items-center justify-center shadow-xl shadow-indigo-200 border-4 border-white z-10">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                </div>
+                <div class="bg-white p-3 rounded-xl card-shadow border border-gray-100 min-w-[160px] text-right">
+                    <span class="text-[8px] font-bold text-indigo-500 uppercase">Module 1.2</span>
+                    <p class="text-xs font-bold text-slate-800">Visual Hierarchy</p>
+                </div>
+            </div>
+            <!-- Quiz Station -->
+            <div class="absolute top-[650px] left-[610px] -translate-x-1/2 flex items-center gap-4">
+                <div
+                    class="w-12 h-12 rounded-xl bg-amber-400 flex items-center justify-center shadow-xl shadow-amber-100 border-4 border-white rotate-12 z-10">
+                    <span class="text-white font-black text-xl -rotate-12">Q</span>
+                </div>
+                <div class="bg-indigo-600 text-white px-2 py-1 rounded-lg text-[8px] font-bold shadow-lg">
+                    Score: 100%
+                </div>
+            </div>
+            <!-- Current Station (Expanded Card) -->
+            <div class="absolute top-[950px] left-[280px] -translate-x-1/2 flex items-center gap-10">
+                <div class="bg-white p-6 rounded-3xl card-shadow border border-gray-100 w-64 float-animation">
+                    <span
+                        class="bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full text-[9px] font-bold uppercase mb-3 inline-block">Current
+                        Station</span>
+                    <h3 class="text-sm font-bold text-slate-800 mb-1 leading-tight">Review Video 3: Advanced Layout
+                        Patterns</h3>
+                    <p class="text-[10px] text-gray-400">12 mins • Difficulty: Intermediate</p>
+                </div>
+                <div
+                    class="w-16 h-16 rounded-full bg-indigo-600 flex items-center justify-center shadow-2xl shadow-indigo-300 border-4 border-white relative z-10 cursor-pointer hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6 text-white ml-1" fill="currentColor" viewbox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"></path>
+                    </svg>
+                </div>
+            </div>
+            <!-- Locked Station: Interaction States -->
+            <div class="absolute top-[1350px] left-[520px] -translate-x-1/2 flex items-center flex-row-reverse gap-4">
+                <div
+                    class="w-10 h-10 rounded-full bg-white flex items-center justify-center border-4 border-gray-100 z-10 shadow-sm opacity-60">
+                    <svg class="w-4 h-4 text-gray-300" fill="currentColor" viewbox="0 0 20 20">
+                        <path clip-rule="evenodd"
+                            d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                            fill-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <p class="text-xs font-semibold text-gray-400">Interaction States</p>
+            </div>
+            <!-- Unit Quiz Locked -->
+            <div class="absolute top-[1550px] left-[480px] -translate-x-1/2 flex items-center gap-4">
+                <div
+                    class="w-10 h-10 rounded-xl bg-white flex items-center justify-center border-4 border-gray-100 z-10 shadow-sm opacity-50">
+                    <span class="text-gray-300 font-bold text-lg">?</span>
+                </div>
+                <p class="text-xs font-semibold text-gray-300">Unit Quiz</p>
+            </div>
+            <!-- Capstone Project (Placeholder) -->
+            <div class="absolute top-[1950px] left-[320px] -translate-x-1/2 text-center">
+                <div
+                    class="w-24 h-24 rounded-3xl bg-gray-50 flex flex-col items-center justify-center border-2 border-dashed border-gray-200 mb-4 opacity-40">
+                    <svg class="w-8 h-8 text-gray-300 mb-1" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path
+                            d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                    <span class="text-[8px] font-bold text-gray-400 uppercase">Capstone</span>
+                </div>
+                <div class="opacity-50">
+                    <h4 class="text-sm font-bold text-slate-800">System Architecture Project</h4>
+                    <p class="text-[10px] text-gray-400">Complete modules to unlock station</p>
+                </div>
+            </div>
+            <!-- Technical Interview (Live Session) -->
+            <div class="absolute top-[2300px] left-[350px] -translate-x-1/2 flex items-center flex-row-reverse gap-8">
+                <div class="relative">
+                    <div
+                        class="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-500 text-white text-[8px] font-black uppercase px-2 py-0.5 rounded-full flex items-center gap-1 z-20 whitespace-nowrap">
+                        <span class="w-1 h-1 bg-white rounded-full animate-pulse"></span> Live Session
+                    </div>
+                    <div
+                        class="w-32 h-36 rounded-3xl bg-indigo-600 flex flex-col items-center justify-center shadow-2xl shadow-indigo-400 border-4 border-white/20 relative z-10">
+                        <div class="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                <path
+                                    d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 11-6 0 3 3 0 016 0z"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                            </svg>
+                        </div>
+                        <span class="text-[10px] font-bold text-white/80 uppercase tracking-widest">Interview</span>
+                    </div>
+                </div>
+                <div class="text-right max-w-[160px]">
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">Technical Interview</h3>
+                    <p class="text-[11px] text-gray-500 leading-relaxed">Defense your architectural decisions before a
+                        panel of senior industry experts.</p>
+                </div>
+            </div>
+            <!-- Final Certificate Shield -->
+            <div class="absolute top-[2650px] left-[1/2] left-[500px] -translate-x-1/2 flex flex-col items-center">
+                <div class="relative w-48 h-56 flex items-center justify-center filter drop-shadow-2xl">
+                    <!-- Shield Background (Custom CSS or nested divs for complex shape) -->
+                    <div class="absolute inset-0 bg-indigo-600 rounded-b-[40%] rounded-t-[10%] opacity-80"
+                        style="clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);"></div>
+                    <div class="absolute inset-2 bg-white/10 rounded-b-[40%] rounded-t-[10%]"
+                        style="clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);"></div>
+                    <div class="z-20 flex flex-col items-center">
+                        <div
+                            class="w-20 h-20 bg-amber-400 rounded-full flex items-center justify-center border-4 border-amber-200 mb-4 shadow-inner">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                <path
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                            </svg>
+                        </div>
+                        <span class="text-xl font-black text-white uppercase tracking-widest">Certificate</span>
+                    </div>
+                </div>
+                <div class="h-20 w-1 bg-gradient-to-b from-gray-200 to-transparent mt-4 opacity-50"></div>
+            </div>
+        </section>
+        <!-- END: RoadmapCanvas -->
+    </main>
+    <!-- BEGIN: Footer -->
+    <footer
+        class="bg-gray-100 border-t border-gray-200 py-6 px-10 flex justify-between items-center text-gray-400 text-xs">
+        <div class="flex items-center gap-2">
+            <span class="font-bold text-gray-600">Careery</span>
+        </div>
+        <p>© 2026 Careery | All rights reserved.</p>
+    </footer>
+    <!-- END: Footer -->
+</body>
+
+</html>

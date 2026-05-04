@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Careery - Explore More</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <style data-purpose="custom-typography">
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+    <style data-purpose="layout-styling">
+        .expert-card {
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .expert-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .purple-gradient-text {
+            background: linear-gradient(to right, #7C3AED, #6366F1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .podcast-scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .podcast-scroll-container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-slate-800">
+    <!-- BEGIN: MainHeader -->
+    <header
+        class="bg-white border-b border-gray-100 py-4 px-6 md:px-12 flex justify-between items-center sticky top-0 z-50">
+        <div class="flex items-center gap-2">
+            <span class="text-2xl font-extrabold text-[#7C3AED]">Careery</span>
+        </div>
+        <nav class="flex items-center gap-6">
+            <a class="text-sm font-medium text-gray-600 hover:text-[#7C3AED]" href="#">My Progress</a>
+            <div class="relative">
+                <button class="p-2 text-gray-400 hover:text-[#7C3AED] transition-colors">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v1m6 0H9"
+                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                </button>
+            </div>
+            <div
+                class="w-10 h-10 bg-[#7C3AED] text-white rounded-lg flex items-center justify-center font-bold text-sm">
+                MZ
+            </div>
+        </nav>
+    </header>
+    <!-- END: MainHeader -->
+    <main>
+        <!-- BEGIN: HeroSection -->
+        <section class="py-16 px-6 text-center max-w-4xl mx-auto" data-purpose="hero-section">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-6">
+                Explore <span class="text-[#7C3AED]">More</span>
+            </h1>
+            <p class="text-gray-500 text-lg md:text-xl leading-relaxed">
+                Follow top experts, explore podcasts, and read the best books in your field. Curated clarity for your
+                professional trajectory.
+            </p>
+        </section>
+        <!-- END: HeroSection -->
+        <!-- BEGIN: TopExpertsSection -->
+        <section class="py-12 px-6 md:px-12 max-w-7xl mx-auto" data-purpose="experts-grid">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-900">Top Experts</h2>
+                </div>
+                <!-- Filter Tabs -->
+                <div class="flex bg-gray-100 p-1 rounded-full text-xs font-semibold text-gray-500">
+                    <button class="px-6 py-2 rounded-full bg-white text-indigo-600 shadow-sm">All</button>
+                    <button class="px-6 py-2 rounded-full hover:text-indigo-600 transition-colors">Frontend</button>
+                    <button class="px-6 py-2 rounded-full hover:text-indigo-600 transition-colors">Backend</button>
+                    <button class="px-6 py-2 rounded-full hover:text-indigo-600 transition-colors">Ai</button>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Expert Card 1 -->
+                <div
+                    class="expert-card bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col items-start">
+                    <img alt="Osama Elzero" class="w-20 h-20 rounded-full mb-4 border-2 border-slate-900 p-0.5"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuApNhd5xdhkoFVRcV7Yw8xx8tCiM_ZPuIta13ubJ4YQtzrbFz5FoP-QTJ-tlPgeU3c2QiycE_0fQztziux-cacy-l24lbmzJNtGDLQylXURVWWu_p6QdiKB5ZZ8_yoM45RR0I7iZdHpikTj-IS3qJR9zcvBRzmbNgSUqaFRJZ8RTuDqyEhtIUwZa9dNVFX86AdXDSilHXT43EuDXynGZ0UWA7fvX4MnqZOtooDGPPyuNzoXMSVfaFd-Zc0RgNmrf2x0oZxVvRaTu7M" />
+                    <h3 class="text-lg font-bold text-slate-900 mb-1">Osama Elzero</h3>
+                    <p class="text-xs font-bold text-indigo-600 mb-4 uppercase tracking-wider">Software Engineer</p>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Osama Zero is a skilled software engineer with
+                        expertise in building modern user interfaces and applying cutting-edge technologies to achieve
+                        user experiences effectively.</p>
+                    <div class="mt-auto flex gap-4 text-gray-400">
+                        <button class="hover:text-indigo-600"><svg class="h-4 w-4" fill="none" stroke="currentColor"
+                                viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                            </svg></button>
+                        <button class="hover:text-indigo-600"><svg class="h-4 w-4" fill="currentColor"
+                                viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z">
+                                </path>
+                            </svg></button>
+                        <button class="hover:text-indigo-600"><svg class="h-4 w-4" fill="none" stroke="currentColor"
+                                viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9h18"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                            </svg></button>
+                    </div>
+                </div>
+                <!-- Expert Card 2 -->
+                <div
+                    class="expert-card bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col items-start">
+                    <img alt="Ghareeb Elshaikh" class="w-20 h-20 rounded-full mb-4 border-2 border-slate-900 p-0.5"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmCQniVVuTnwPTqZtg11cyoXTeMAGz0HFofwqb5rpkhQc_193zNwiGOmm0Uf9gGULdNrteb2A6wk2Kp05Kgyaku01kzcsoFKwegE3dsnhcUeLJDCllPP7dR1leTBIVom4mNsQ5yzsmSneQ1-C521Io-R9Cj1i8DuOl5nNFdSH6LX7JoUzmrYuX-ut1cNLKbCYqymi6lA4VZJELAuszoX9PGnLKhles37aBKVR8_E7wxHCYwImvctdCw2x100ML7GrPQT_9Z1tTnXQ" />
+                    <h3 class="text-lg font-bold text-slate-900 mb-1">Ghareeb Elshaikh</h3>
+                    <p class="text-xs font-bold text-indigo-600 mb-4 uppercase tracking-wider">Software Engineer</p>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Ghareeb El Sheikh is a software engineer
+                        focused on creating efficient solutions, emphasizing code quality, performance, maintainability,
+                        and a passion for modern technologies.</p>
+                    <div class="mt-auto flex gap-4 text-gray-400">
+                        <button class="hover:text-indigo-600"><svg class="h-4 w-4" fill="none" stroke="currentColor"
+                                viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                            </svg></button>
+                        <button class="hover:text-indigo-600"><svg class="h-4 w-4" fill="currentColor"
+                                viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z">
+                                </path>
+                            </svg></button>
+                        <button class="hover:text-indigo-600"><svg class="h-4 w-4" fill="none" stroke="currentColor"
+                                viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9h18"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                            </svg></button>
+                    </div>
+                </div>
+                <!-- Expert Card 3 -->
+                <div
+                    class="expert-card bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col items-start">
+                    <img alt="Islam codezilla" class="w-20 h-20 rounded-full mb-4 border-2 border-slate-900 p-0.5"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnOkEnoQcjxuSW_hC3otD2EtAGqswN_ffveuVTHw8zLQflVqLCdmz5fMNgMb_UeTULHisTaHjY-wqdqnWsS_rql55lxUYPpYElKHbIEPLos8ihxVSbrNDhVaIHk5fY0OgipU9G8Z56jttuqYU36eHxJF9mmBNjn48XeyH6zeZ81T2w_n6-vtXapBUHBNUTClVCMsX0i0K4hqJ5LlNDo9bdiv0nbGjyk7alarl7aXFlT3X5weGFvdSeDe7erO4kUVAo9zegbBHnico" />
+                    <h3 class="text-lg font-bold text-slate-900 mb-1">Islam codezilla</h3>
+                    <p class="text-xs font-bold text-indigo-600 mb-4 uppercase tracking-wider">Software Engineer</p>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Islam Codezilla is a creative software
+                        engineer specializing in developing advanced applications while following best practices,
+                        fostering innovation, and improving the end-user experience.</p>
+                    <div class="mt-auto flex gap-4 text-gray-400">
+                        <button class="hover:text-indigo-600"><svg class="h-4 w-4" fill="none" stroke="currentColor"
+                                viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                            </svg></button>
+                        <button class="hover:text-indigo-600"><svg class="h-4 w-4" fill="currentColor"
+                                viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z">
+                                </path>
+                            </svg></button>
+                        <button class="hover:text-indigo-600"><svg class="h-4 w-4" fill="none" stroke="currentColor"
+                                viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9h18"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                            </svg></button>
+                    </div>
+                </div>
+                <!-- Expert Card 4 -->
+                <div
+                    class="expert-card bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col items-start">
+                    <img alt="Mohamed Gawish" class="w-20 h-20 rounded-full mb-4 border-2 border-slate-900 p-0.5"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKtiUE8kFH_S6C4_nNRmWUKzhBfaAc9f9mDSukLFyQnLl9qj_uFleuD5fOe7eVwhOy3GAj6ne6YQOBRyarAiZ0pDR9F2jNCKdcZuxgA3TytNVshV59olRFX3s94qpEpfCXova1wU1X9j0a1TF1L6uF7ZOG4yMaz2vVgU1PAuohsSWeBZg21R8KTlX99OAhfkToXmWmv27OTeEehBvczcdcxQIS5Os9KFJqSyIcSkYyMWluhhWXL-f9mVN6HjbVxADQBKenmov9KnY" />
+                    <h3 class="text-lg font-bold text-slate-900 mb-1">Mohamed Gawish</h3>
+                    <p class="text-xs font-bold text-indigo-600 mb-4 uppercase tracking-wider">CEO iSchool</p>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Mohamed Gawish is Chief Operating Officer at
+                        iSchool, specializing in leading teams, optimizing processes, and ensuring high performance to
+                        achieve company goals efficiently.</p>
+                    <div class="mt-auto flex gap-4 text-gray-400">
+                        <button class="hover:text-indigo-600"><svg class="h-4 w-4" fill="none" stroke="currentColor"
+                                viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                            </svg></button>
+                        <button class="hover:text-indigo-600"><svg class="h-4 w-4" fill="currentColor"
+                                viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z">
+                                </path>
+                            </svg></button>
+                        <button class="hover:text-indigo-600"><svg class="h-4 w-4" fill="none" stroke="currentColor"
+                                viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9h18"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END: TopExpertsSection -->
+        <!-- BEGIN: PodcastsSection -->
+        <section class="py-16 px-6 md:px-12 bg-white" data-purpose="podcasts-section">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex justify-between items-center mb-10">
+                    <h2 class="text-3xl font-bold text-slate-900">Podcasts</h2>
+                    <div class="flex gap-2">
+                        <button
+                            class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:border-indigo-600 hover:text-indigo-600 transition-all">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"></path>
+                            </svg>
+                        </button>
+                        <button
+                            class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:border-indigo-600 hover:text-indigo-600 transition-all">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="podcast-scroll-container flex gap-6 overflow-x-auto pb-4">
+                    <!-- Podcast Card 1 -->
+                    <div class="flex-shrink-0 w-72">
+                        <div
+                            class="rounded-2xl overflow-hidden mb-4 aspect-square bg-gray-100 shadow-sm relative group cursor-pointer">
+                            <img alt="Programming Is Not For All" class="w-full h-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2MUy2eXCBn4aESdsIMupcJjqyWHDQFQlq-kHla1DnXLMqRTowpVGRG7CGSAtSyoZBlqXvLgvQ77IFANfaCG0jBBUNmXJ6qIF-D_lw2e9TH9Ser3G2LtqDrdY42FOlUkax8nUln9EyFeLBbbml53kdXWHcQeEWXdBlD7j-nyoo2rvxG6R1PEe0Altbjh_QWXvbjTKrotB4aJl_IHe19cHlTULhTl__tM2z7xDQVEJXk5eN8JrlTpjGmC-CFAPz3mwntgzclYMwwf8" />
+                            <div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors"></div>
+                        </div>
+                        <h4 class="font-bold text-slate-900 mb-1 truncate">Programming Is Not For All</h4>
+                        <div
+                            class="flex items-center gap-1.5 text-red-600 text-[10px] font-bold uppercase tracking-wider mb-4">
+                            <svg class="w-3 h-3" fill="currentColor" viewbox="0 0 24 24">
+                                <path
+                                    d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z">
+                                </path>
+                            </svg>
+                            YOUTUBE
+                        </div>
+                        <button
+                            class="w-full py-2.5 bg-gray-100 text-slate-700 text-sm font-bold rounded-lg hover:bg-gray-200 transition-colors">Listen
+                            Now</button>
+                    </div>
+                    <!-- Podcast Card 2 -->
+                    <div class="flex-shrink-0 w-72">
+                        <div
+                            class="rounded-2xl overflow-hidden mb-4 aspect-square bg-gray-100 shadow-sm relative group cursor-pointer">
+                            <img alt="How To Start Your Journey" class="w-full h-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqgNnXVtaIa_umQPhTAVp7P6CdXUlev2Er_ue9jXzUaf06WsugsUlbLee9FP6vwy4zGU1nR8FN8XF1UmHPlTPH9jl2rFg1xhn75GMk9sRCIoo-ejrU8icGst6so_UyDF-8_06SjDiridGpnEmE3ngay4Sa1ksZExw0gCq8h_srvNILu2u4Cn-dQL_E4Dr96fyfq43nzzBhgDvDl388At7CQWrGoLhTJvKMQFeMHxvtzdD0RHQkgnEKU9475p_f2OqLM6hU-t6aCsE" />
+                            <div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors"></div>
+                        </div>
+                        <h4 class="font-bold text-slate-900 mb-1 truncate">How To Start Your Journey With Pr..</h4>
+                        <div
+                            class="flex items-center gap-1.5 text-red-600 text-[10px] font-bold uppercase tracking-wider mb-4">
+                            <svg class="w-3 h-3" fill="currentColor" viewbox="0 0 24 24">
+                                <path
+                                    d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z">
+                                </path>
+                            </svg>
+                            YOUTUBE
+                        </div>
+                        <button
+                            class="w-full py-2.5 bg-gray-100 text-slate-700 text-sm font-bold rounded-lg hover:bg-gray-200 transition-colors">Listen
+                            Now</button>
+                    </div>
+                    <!-- Podcast Card 3 -->
+                    <div class="flex-shrink-0 w-72">
+                        <div
+                            class="rounded-2xl overflow-hidden mb-4 aspect-square bg-gray-100 shadow-sm relative group cursor-pointer">
+                            <img alt="Podcast With Islam Codezilla" class="w-full h-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLTS1KXUM-sLUXu8acIM9OJpQNiuxi0un_I_q3VsoLdmGaRo6yP37E7tePqk7dUH05YpxO6FRc8sn6vMD9NdgYaD4iqTz3ejKXO9jnZnszsW_0OIcZUhUYRRsX6e7N8aYvAjUEkvv4MWGZCU38DTsqsgwhSht95sEoHYZP4wugmBULn9vT6YHgO-H7oVB6_mX9pxQWuI5peb87G7F8BVcYrxuvqXwwXOZqziQDxVpLDNVKSW0xfXr3EMBlLRW_JhmDCSVqNaa7rsk" />
+                            <div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors"></div>
+                        </div>
+                        <h4 class="font-bold text-slate-900 mb-1 truncate">Podcast With Islam Codezilla</h4>
+                        <div
+                            class="flex items-center gap-1.5 text-red-600 text-[10px] font-bold uppercase tracking-wider mb-4">
+                            <svg class="w-3 h-3" fill="currentColor" viewbox="0 0 24 24">
+                                <path
+                                    d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z">
+                                </path>
+                            </svg>
+                            YOUTUBE
+                        </div>
+                        <button
+                            class="w-full py-2.5 bg-gray-100 text-slate-700 text-sm font-bold rounded-lg hover:bg-gray-200 transition-colors">Listen
+                            Now</button>
+                    </div>
+                    <!-- Podcast Card 4 -->
+                    <div class="flex-shrink-0 w-72">
+                        <div
+                            class="rounded-2xl overflow-hidden mb-4 aspect-square bg-gray-100 shadow-sm relative group cursor-pointer">
+                            <img alt="Podcast With M." class="w-full h-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDB3fKQeb0RLFC11ajCC2Ag-qlGCH5Rc52AfAClQfrl6PTwrLiijcrcet8nI41BBvnXKhD4YDAY0p1PBZetyzJIDPEBhvNCrwmS01Fp3ACUmfWzbRg1qypTuHizCosKMprfj7Er5XFyBti8dtS9HUZ-T-u177RJd6I---mChdvEGEe-bM6-Qq2sifbQNuWi5RxdJpRecCu8CMSUfwC2aYamvPhRENRXUZWX1q4T-elX2jlrGdayExDbum__OryyphmnxhE6-fCToPw" />
+                            <div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors"></div>
+                        </div>
+                        <h4 class="font-bold text-slate-900 mb-1 truncate">Podcast With M..</h4>
+                        <div
+                            class="flex items-center gap-1.5 text-red-600 text-[10px] font-bold uppercase tracking-wider mb-4">
+                            <svg class="w-3 h-3" fill="currentColor" viewbox="0 0 24 24">
+                                <path
+                                    d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z">
+                                </path>
+                            </svg>
+                            YOUTUBE
+                        </div>
+                        <button
+                            class="w-full py-2.5 bg-gray-100 text-slate-700 text-sm font-bold rounded-lg hover:bg-gray-200 transition-colors">Listen
+                            Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END: PodcastsSection -->
+        <!-- BEGIN: BooksSection -->
+        <section class="py-20 px-6 md:px-12" data-purpose="books-section">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-3xl font-bold text-slate-900 mb-12">Books</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                    <!-- Book 1 -->
+                    <div class="flex items-start gap-6">
+                        <div class="w-32 flex-shrink-0 shadow-lg rounded overflow-hidden">
+                            <img alt="Clean Code" class="w-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjKRMO9eCv80Rnm3ZI1N03e4yyx8pr5KzShQFowrfgSyhaxsEJS0bndfLKXbuEqIC1e1SVCk_ULpZR2ISMzJru7NontM4mQ8HOd1wXJ11Ko2GWoNM9CTACU-Si3L0ih2vrgeFuBMXq4kkHk7LF2GrE5uDL9HzhdPhepxeZxcbrVZMuF0svKjQfXtHrmHjsoRi1w6xrKdOyOC-h9NA6OCgFCb1SqG4P_Ar90_8CtASZopQxasBpsQSJroTzFZn208q0r7xlXctJAlU" />
+                        </div>
+                        <div class="flex flex-col h-full">
+                            <h3 class="text-xl font-bold text-slate-900 mb-1">Clean Code</h3>
+                            <p class="text-sm text-gray-400 mb-3">by Robert C. Martin</p>
+                            <div class="flex text-amber-400 mb-4">
+                                <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <a class="mt-auto text-indigo-600 font-bold text-xs flex items-center gap-1" href="#">View
+                                Details <svg class="h-3 w-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"></path>
+                                </svg></a>
+                        </div>
+                    </div>
+                    <!-- Book 2 -->
+                    <div class="flex items-start gap-6">
+                        <div class="w-32 flex-shrink-0 shadow-lg rounded overflow-hidden">
+                            <img alt="Comptia A+" class="w-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEyg5WIxki8MGSXo4iwu00Yovvq_WlhtrRV-cUBvWSvIHbT-8089qBBZ8KPpjqRIfNTGdmHHNqXH0oF3NXCZjT3Lb_I-rpNJaLvdsix-ezaeA9avDnOTCaqjDbIBRZV2e0cb1UsVeob5GbMcudzM8hGTLoXuqjB6Fk5enJKUYdiU2mDH9g-zHcfzReOdLOjKUJbqYKcbGm4nntS7E6Qxpj9kAd_2luhTfxxQ236WbLxkU9p9V-_udf6X4kuzWsTceuUNfDe5Ox5FY" />
+                        </div>
+                        <div class="flex flex-col h-full">
+                            <h3 class="text-xl font-bold text-slate-900 mb-1">Comptia A+</h3>
+                            <p class="text-sm text-gray-400 mb-3">by Comptia</p>
+                            <div class="flex text-amber-400 mb-4">
+                                <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <a class="mt-auto text-indigo-600 font-bold text-xs flex items-center gap-1" href="#">View
+                                Details <svg class="h-3 w-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"></path>
+                                </svg></a>
+                        </div>
+                    </div>
+                    <!-- Book 3 -->
+                    <div class="flex items-start gap-6">
+                        <div class="w-32 flex-shrink-0 shadow-lg rounded overflow-hidden">
+                            <img alt="Grokking Algorithms" class="w-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuABWMhMNcOJWlg76I0qEw_6i2UGG7_UtZZ04_Ocb9bG8CQo7v4X0FdIwS5-GbhuKCVJsrjVMoJZS6GuYSP5WH9otKIvwAITwKVNQ91j3lA_OdcZxyI5MRd7_5290vQsHQDN9nU6Pg-SWsbP8TfojwLH1zokfP57Y_bwp37dUyzZT4JzUdeBX3y80Qym4DTz-SqNqR6T9RWJ5JolGH24OLqVlEPEeCsJWqNTzEZ9-9InjND5j1OY1HkYYKsdh68h8zzepZputen8wIc" />
+                        </div>
+                        <div class="flex flex-col h-full">
+                            <h3 class="text-xl font-bold text-slate-900 mb-1">Grokking Algorithms</h3>
+                            <p class="text-sm text-gray-400 mb-3">by Aditya Bhargava</p>
+                            <div class="flex text-amber-400 mb-4">
+                                <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <a class="mt-auto text-indigo-600 font-bold text-xs flex items-center gap-1" href="#">View
+                                Details <svg class="h-3 w-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"></path>
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END: BooksSection -->
+        <!-- BEGIN: RoadmapSection -->
+        <section class="py-24 px-6 md:px-12 bg-white" data-purpose="roadmap-section">
+            <div class="max-w-5xl mx-auto text-center">
+                <h2 class="text-4xl font-extrabold text-slate-900 mb-4">Your Growth Roadmap</h2>
+                <p class="text-gray-500 mb-16 max-w-2xl mx-auto">A continuous cycle of learning, listening, and leading.
+                    Follow this path to career mastery.</p>
+                <div class="relative grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-4">
+                    <!-- Step 1 -->
+                    <div class="relative z-10">
+                        <div
+                            class="w-16 h-16 bg-indigo-600 rounded-3xl flex items-center justify-center text-white mx-auto mb-8 shadow-xl shadow-indigo-100">
+                            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                            </svg>
+                        </div>
+                        <div class="bg-gray-50 p-8 rounded-2xl border border-gray-100">
+                            <h4 class="text-lg font-extrabold text-slate-900 mb-3">1. Follow Experts</h4>
+                            <p class="text-sm text-gray-500 leading-relaxed">Build your foundational network by curating
+                                insights from the industry's brightest minds.</p>
+                        </div>
+                    </div>
+                    <!-- Connector 1 -->
+                    <div class="hidden md:block absolute top-8 left-[33%] w-[50%] h-0.5 bg-indigo-200"></div>
+                    <!-- Step 2 -->
+                    <div class="relative z-10">
+                        <div
+                            class="w-16 h-16 bg-[#7C3AED] rounded-3xl flex items-center justify-center text-white mx-auto mb-8 shadow-xl shadow-purple-100">
+                            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                            </svg>
+                        </div>
+                        <div class="bg-gray-50 p-8 rounded-2xl border border-gray-100">
+                            <h4 class="text-lg font-extrabold text-slate-900 mb-3">2. Listen to Podcasts</h4>
+                            <p class="text-sm text-gray-500 leading-relaxed">Deepen your context through long-form
+                                conversations and real-world case studies.</p>
+                        </div>
+                    </div>
+                    <!-- Connector 2 -->
+                    <div class="hidden md:block absolute top-8 right-[33%] w-[50%] h-0.5 bg-purple-200"></div>
+                    <!-- Step 3 -->
+                    <div class="relative z-10">
+                        <div
+                            class="w-16 h-16 bg-[#B45309] rounded-3xl flex items-center justify-center text-white mx-auto mb-8 shadow-xl shadow-amber-100">
+                            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                            </svg>
+                        </div>
+                        <div class="bg-gray-50 p-8 rounded-2xl border border-gray-100">
+                            <h4 class="text-lg font-extrabold text-slate-900 mb-3">3. Read Books</h4>
+                            <p class="text-sm text-gray-500 leading-relaxed">Solidify your expertise with timeless
+                                principles and rigorous technical frameworks.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END: RoadmapSection -->
+    </main>
+    <!-- BEGIN: MainFooter -->
+    <footer
+        class="bg-gray-50 border-t border-gray-200 py-10 px-6 md:px-12 flex flex-col md:flex-row justify-between items-center"
+        data-purpose="site-footer">
+        <div class="text-2xl font-extrabold text-slate-800 mb-4 md:mb-0">Careery</div>
+        <div class="text-sm text-gray-400">
+            © 2026 Careery | All rights reserved.
+        </div>
+    </footer>
+    <!-- END: MainFooter -->
+</body>
+
+</html>
