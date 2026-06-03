@@ -1,332 +1,533 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Careery - Build Your Career Now</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap"
         rel="stylesheet" />
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            purple: '#6366f1',
-                            darkPurple: '#4f46e5',
-                            lightPurple: '#eef2ff',
-                        }
-                    }
-                }
+    <style>
+        :root {
+            --brand: #6336c7;
+            --brand-light: #8b5cf6;
+            --brand-dark: #4c1d95;
+            --brand-glow: rgba(99, 54, 199, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #fff;
+            color: #1a1033;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .syne {
+            font-family: 'Syne', sans-serif;
+        }
+
+        .bg-blob {
+            position: fixed;
+            top: -200px;
+            right: -200px;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            animation: blobPulse 9s ease-in-out infinite;
+        }
+
+        .bg-blob-2 {
+            position: fixed;
+            bottom: -200px;
+            left: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(244, 114, 182, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            animation: blobPulse 11s ease-in-out infinite reverse;
+        }
+
+        @keyframes blobPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08) translate(15px, -15px);
             }
         }
-    </script>
-    <style data-purpose="custom-styling">
-        body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
+
+        @keyframes floatUp {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
         }
 
-        .hero-gradient {
-            background: radial-gradient(circle at 70% 50%, rgba(99, 102, 241, 0.1) 0%, rgba(255, 255, 255, 0) 50%);
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .bg-brand-purple-1 {
-            background-color: #6336c7;
+        .fade-up {
+            animation: fadeSlideUp 0.6s ease forwards;
         }
-        .border-brand-purple-1 {
-            border-color: #6336c7;
+
+        .fade-up-1 {
+            animation: fadeSlideUp 0.6s 0.1s ease both;
         }
-        .brand-purple {
-            color: #6336c7;
+
+        .fade-up-2 {
+            animation: fadeSlideUp 0.6s 0.25s ease both;
+        }
+
+        .fade-up-3 {
+            animation: fadeSlideUp 0.6s 0.4s ease both;
+        }
+
+        .float-tag {
+            animation: floatUp 3.5s ease-in-out infinite;
+        }
+
+        .float-tag-2 {
+            animation: floatUp 4.5s 0.5s ease-in-out infinite;
+        }
+
+        .float-tag-3 {
+            animation: floatUp 4s 1s ease-in-out infinite;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--brand), var(--brand-light));
+            color: #fff;
+            font-weight: 700;
+            border-radius: 14px;
+            padding: 14px 32px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Syne', sans-serif;
+            box-shadow: 0 6px 24px var(--brand-glow);
+            border: none;
+            display: inline-block;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 36px var(--brand-glow);
+        }
+
+        .btn-outline {
+            background: #fff;
+            color: #1a1033;
+            font-weight: 700;
+            border-radius: 14px;
+            padding: 14px 32px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Syne', sans-serif;
+            border: 2px solid #e5e7eb;
+            display: inline-block;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--brand);
+            color: var(--brand);
+        }
+
+        .feature-card {
+            background: #fff;
+            border: 1px solid #f0eefe;
+            border-radius: 20px;
+            padding: 36px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 16px rgba(99, 54, 199, 0.04);
+        }
+
+        .feature-card:hover {
+            box-shadow: 0 12px 40px rgba(99, 54, 199, 0.12);
+            transform: translateY(-4px);
+            border-color: rgba(99, 54, 199, 0.2);
+        }
+
+        .step-num {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: 2px solid var(--brand);
+            color: var(--brand);
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .step-row:hover .step-num {
+            background: var(--brand);
+            color: #fff;
+        }
+
+        .testimonial-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 2px 20px rgba(99, 54, 199, 0.05);
+            border: 1px solid #f0eefe;
+        }
+
+        nav a {
+            text-decoration: none;
+        }
+
+        a {
+            text-decoration: none;
         }
     </style>
 </head>
 
-<body class="bg-white text-slate-900 overflow-x-hidden">
-    <!-- BEGIN: Navigation -->
-    <nav
-        class="flex items-center justify-between px-6 py-4 md:px-12 lg:px-24 bg-white/80 backdrop-blur-md sticky top-0 z-50">
-        <div class="flex items-center">
-            <span class="text-2xl font-extrabold tracking-tight brand-purple">Careery</span>
-        </div>
-        <div class="flex items-center space-x-6">
-            <a class="text-sm font-semibold hover:text-brand-purple transition-colors" href="#">Login</a>
-            <a class="bg-brand-purple-1 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-darkPurple transition-all shadow-md hover:shadow-lg"
-                href="#">Sign Up</a>
-        </div>
-    </nav>
-    <!-- END: Navigation -->
-    <!-- BEGIN: Hero Section -->
-    <section class="relative overflow-hidden hero-gradient pt-12 pb-24 md:pt-20 md:pb-32 lg:px-24 px-6" id="hero">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-12">
-            <!-- Text Content -->
-            <div data-purpose="hero-content">
-                <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight text-slate-900">
-                    Build Your<br />
-                    <span class="brand-purple">Career Now</span>
-                </h1>
-                <p class="mt-6 text-lg text-slate-600 max-w-lg leading-relaxed">
-                    Discover your path, build skills, and unlock opportunities with our personalized career intelligence
-                    platform.
-                </p>
-                <div class="mt-10 flex flex-wrap gap-4">
-                    <a href="explore.html"
-                        class="bg-brand-purple-1 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-brand-darkPurple transition-all shadow-lg shadow-indigo-200">
-                        Get Started
-                    </a>
-                    <a href="career-path.html"
-                        class="bg-white border-2 border-slate-200 text-slate-700 px-8 py-4 rounded-xl font-bold text-lg hover:border-brand-purple hover:text-brand-purple transition-all">
-                        Explore Careers
-                    </a>
-                </div>
-            </div>
-            <!-- Illustration Area -->
-            <div class="relative flex justify-center lg:justify-end" data-purpose="hero-illustration">
-                <div class="relative w-full max-w-md lg:max-w-xl">
-                    <!-- Character & Path Placeholder -->
-                    <div
-                        class="aspect-square bg-slate-50 rounded-full absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] opacity-40 blur-3xl">
-                    </div>
-                    <!-- Mocking the winding path and character with an image placeholder -->
-                    <img alt="Career Path Illustration" class="w-full h-auto drop-shadow-2xl"
-                    
-                        src="Images/Home-1.png" />
-                    
-                        <!-- Floating Tags (Responsive positioning) -->
-                    <div class="absolute -top-4 -right-4 bg-white p-3 rounded-xl shadow-xl flex items-center gap-3 border border-slate-50 animate-bounce transition-all duration-1000"
-                        style="animation-duration: 3s;">
-                        <div class="w-8 h-8 bg-orange-100 flex items-center justify-center rounded-lg">
-                            <span class="text-orange-600 text-xs">💼</span>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const FEATURES = [
+            {
+                icon: "💡", color: "#ede9fe", iconColor: "#6336c7",
+                title: "Career Quiz", desc: "Take this short quiz to discover your skills and interests. In just a few minutes, pinpoint your strengths and take a confident step toward your career path."
+            },
+            {
+                icon: "🗺️", color: "#f0fdf4", iconColor: "#16a34a",
+                title: "Learning Roadmaps", desc: "After the quiz, receive a personalized roadmap that aligns with your interests and goals, providing clear steps to guide you toward success."
+            },
+            {
+                icon: "🏆", color: "#fff7ed", iconColor: "#ea580c",
+                title: "Certifications", desc: "Complete your roadmap and earn a certified credential. This certificate will enhance your value in the job market and open new opportunities."
+            },
+        ];
+
+        const STEPS = [
+            { n: "1", title: "Take the Quiz", desc: "Discover your skills and interests in just a few minutes." },
+            { n: "2", title: "Get Your Roadmap", desc: "Follow a personalized path with clear steps to reach your goals." },
+            { n: "3", title: "Earn Your Certificate", desc: "Complete your roadmap and get certified to prove your skills." },
+        ];
+
+        const TESTIMONIALS = [
+            {
+                name: "Sarah Jenkins", role: "UX Designer @ TechFlow",
+                avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuAWzoDSjjh4TN6q7WvnoPN5RU6H5Gcb3E6JJj6KKR95jPrX0phFb_DxTuOckbdImvIu6l8VKMLOiFYHXfZwi3TTkuPrFaZmECy_5oiM2yeKNolMNEA7_7RGkjZUhjeIMaeJTtbJ-3OZmbQeyjJhUDPMnPiVG_FKiePaMuaQ4mkZ0YI83yMCR2ZNt8X8tYsuuVbwp-ngdNcahUyhGVb_eAjZUX8buQTxExDk8F-hlmiq5oFpC-MV9y7b_dBo0IA05xn5JklJ3LZfEnA",
+                text: "The platform truly provides a clear roadmap for the job market, with every step linked to in-demand skills — not just certificates. The focus is on actually gaining skills."
+            },
+            {
+                name: "Marcus Chen", role: "Full-stack Developer @ Innovate",
+                avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuAC3vqMFu33Vg5oGQySUjDt-1gkYCHj3HyVBUdUmWGLYxQaeHX2TlsBURvMKFvnH6PCy10m89cQ7CRRP5kwZq1DxaB5-RLc8VJOKNr1i-4nXYP5JcynJd3k89Z3OYUps93GApeBvdmztyBVwjy5J4SidCoZBJCSxZu88CjWlK_2iFUR7m5RLlTGrYQmzPPuPIcj-U3W5CLPcO2mlzSxbQ815qoGsZb4w60lcMVL7s5BYSUcuaYUbA5kmXgUclq7nUhjS4k8-2mEyFc",
+                text: "The courses and certifications here are recognized in the industry, and each path comes with full transparency about what you'll learn and how it benefits your career."
+            },
+            {
+                name: "Elena Rodriguez", role: "Product Manager @ GrowthLabs",
+                avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuBdbIuhxmKqsCQjFsk_x2eJgn4ov6mVMgP3rtOqD78-bgs9lYv20_6cTGX1AnQiJ2kgZqAFqVki1g8ASKBXNDh_qz_YnMaGC8NysKSpVvkNLd4U0M_Sd7GW854Nm2ljX9L9hF67a2Tf-yYO541HuXTFr_-wtlvq1VEO96dNAdMZR2eqxdCSzxOVQCw2_DKjWGhG9_CM3WKrTzmF1MO8E9SSMliyJA4gT83KASHyeTbiGl9W084iWeC08zXRzlmDH3pck9hoMmWVcTA",
+                text: "The best part is that every path is practical and hands-on, so you gain immediately applicable skills, boosting both your job prospects and confidence."
+            },
+        ];
+
+        function Nav() {
+            const [scrolled, setScrolled] = useState(false);
+            const [menuOpen, setMenuOpen] = useState(false);
+            useEffect(() => {
+                const fn = () => setScrolled(window.scrollY > 20);
+                window.addEventListener('scroll', fn);
+                return () => window.removeEventListener('scroll', fn);
+            }, []);
+            return (
+                <nav style={{
+                    position: 'sticky', top: 0, zIndex: 50,
+                    background: scrolled ? 'rgba(255,255,255,0.95)' : 'transparent',
+                    backdropFilter: scrolled ? 'blur(12px)' : 'none',
+                    borderBottom: scrolled ? '1px solid #f0eefe' : '1px solid transparent',
+                    transition: 'all 0.3s', padding: '16px 0'
+                }}>
+                    <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <span className="syne" style={{ fontSize: 24, fontWeight: 800, color: 'var(--brand)' }}>Careery</span>
+                        {/* Desktop */}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 24 }} className="hidden-mobile">
+                            <a href="#features" style={{ fontSize: 14, fontWeight: 600, color: '#4b5563' }}>Features</a>
+                            <a href="#journey" style={{ fontSize: 14, fontWeight: 600, color: '#4b5563' }}>How it works</a>
+                            <a href="career-path.html" style={{ fontSize: 14, fontWeight: 600, color: '#4b5563' }}>Career Path</a>
+                            <a href="explore.html" className="btn-primary" style={{ padding: '10px 24px', fontSize: 14 }}>Get Started</a>
                         </div>
-                        <span class="text-xs font-bold text-slate-700">Job Opportunities</span>
+                        {/* Mobile hamburger */}
+                        <button onClick={() => setMenuOpen(!menuOpen)} style={{ display: 'none', background: 'none', border: 'none', cursor: 'pointer', padding: 8 }} className="show-mobile">
+                            <div style={{ width: 22, height: 2, background: '#1a1033', marginBottom: 5, borderRadius: 2 }} />
+                            <div style={{ width: 22, height: 2, background: '#1a1033', marginBottom: 5, borderRadius: 2 }} />
+                            <div style={{ width: 22, height: 2, background: '#1a1033', borderRadius: 2 }} />
+                        </button>
                     </div>
-                    <div class="absolute top-1/4 -left-8 bg-white p-3 rounded-xl shadow-xl flex items-center gap-3 border border-slate-50 animate-bounce transition-all duration-1000"
-                        style="animation-duration: 4s;">
-                        <div class="w-8 h-8 bg-indigo-100 flex items-center justify-center rounded-lg">
-                            <span class="text-indigo-600 text-xs">✔️</span>
+                    {menuOpen && (
+                        <div style={{ background: '#fff', borderTop: '1px solid #f0eefe', padding: '16px 24px', display: 'flex', flexDirection: 'column', gap: 16 }}>
+                            <a href="#features" style={{ fontWeight: 600, color: '#4b5563', fontSize: 15 }} onClick={() => setMenuOpen(false)}>Features</a>
+                            <a href="#journey" style={{ fontWeight: 600, color: '#4b5563', fontSize: 15 }} onClick={() => setMenuOpen(false)}>How it works</a>
+                            <a href="career-path.html" style={{ fontWeight: 600, color: '#4b5563', fontSize: 15 }} onClick={() => setMenuOpen(false)}>Career Path</a>
+                            <a href="explore.html" className="btn-primary" style={{ textAlign: 'center', fontSize: 15 }}>Get Started</a>
                         </div>
-                        <span class="text-xs font-bold text-slate-700">Certificates</span>
-                    </div>
-                    <div class="absolute bottom-1/4 -right-4 bg-white p-3 rounded-xl shadow-xl flex items-center gap-3 border border-slate-50 animate-bounce transition-all duration-1000"
-                        style="animation-duration: 3.5s;">
-                        <div class="w-8 h-8 bg-purple-100 flex items-center justify-center rounded-lg">
-                            <span class="text-purple-600 text-xs">❓</span>
-                        </div>
-                        <span class="text-xs font-bold text-slate-700">Career Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- END: Hero Section -->
-    <!-- BEGIN: Features Grid -->
-    <section class="py-24 px-6 md:px-12 lg:px-24 bg-slate-50/50" id="features">
-        <div class="max-w-7xl mx-auto text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900">
-                Everything you need to <span class="brand-purple">build your career</span>
-            </h2>
-            <p class="mt-4 text-slate-500 font-medium">All the tools you need to build your career path</p>
-        </div>
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Feature Card 1 -->
-            <div class="bg-white p-10 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl transition-all group"
-                data-purpose="feature-card">
-                <div
-                    class="w-14 h-14 bg-indigo-100 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                    <svg class="w-7 h-7 text-indigo-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                        <path
-                            d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold mb-4">Career Quiz</h3>
-                <p class="text-slate-500 leading-relaxed text-sm">
-                    Take this short quiz to discover your skills and interests. In just a few minutes, you'll pinpoint
-                    your strengths, understand your direction, and take a confident step toward your career path.
-                </p>
-            </div>
-            <!-- Feature Card 2 -->
-            <div class="bg-white p-10 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl transition-all group"
-                data-purpose="feature-card">
-                <div
-                    class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                    <svg class="w-7 h-7 text-purple-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                        <path
-                            d="M9 20l-5.447-2.724A2 2 0 013 15.488V5.512a2 2 0 011.553-1.943L9 2l5.447 2.724A2 2 0 0116 6.669V16.331a2 2 0 01-1.553 1.943L9 20z"
-                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold mb-4">Learning Roadmaps</h3>
-                <p class="text-slate-500 leading-relaxed text-sm">
-                    After the quiz, you'll receive a personalized roadmap that aligns with your interests and goals,
-                    providing clear steps to guide you toward success in your career path.
-                </p>
-            </div>
-            <!-- Feature Card 3 -->
-            <div class="bg-white p-10 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl transition-all group"
-                data-purpose="feature-card">
-                <div
-                    class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                    <svg class="w-7 h-7 text-orange-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                        <path
-                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold mb-4">Certifications</h3>
-                <p class="text-slate-500 leading-relaxed text-sm">
-                    After you complete your roadmap, you'll receive a certified credential that proves your success.
-                    This certificate will enhance your value in the job market and open new opportunities in your
-                    career.
-                </p>
-            </div>
-        </div>
-    </section>
-    <!-- END: Features Grid -->
-    <!-- BEGIN: Journey Section -->
-    <section class="py-24 px-6 md:px-12 lg:px-24" id="journey">
-        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
-            <!-- Image Left -->
-            <div class="w-full lg:w-1/2">
-                <div class="relative">
-                    <div class="absolute -top-4 -left-4 w-full h-full border-2 border-indigo-100 rounded-3xl -z-10">
-                    </div>
-                    <img alt="Team collaborating" class="w-full h-auto rounded-3xl shadow-2xl object-cover"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeZ74c8PgzPldLf7nS7PLuX03cpUDB3X9h-3LbuAYDV-kcqvFfvui3_lDjy_MoIKb7zHfXehWrp0XyWcFP2c70BLsAtIY6tkd4KIbsf_on9YsJ7yjpy9TX4DKmR7eudcGEUUwvgP3MXtcLxicLhmKMF8eF7dnOOtRD9jqlONbL9oba7oUHy__2TTJw1F8ThjGJ-LWTw-Ck-K9vvreKWu7V6Lb0uxJKx76Rv0tOx6ztI1ObBJWjHZB9f6eq_-2v7mDAP52dcB0oHFw" />
-                </div>
-            </div>
-            <!-- Steps Right -->
-            <div class="w-full lg:w-1/2" data-purpose="journey-steps">
-                <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-12">
-                    Your <span class="brand-purple">journey</span>
-                </h2>
-                <!-- Step Item 1 -->
-                <div class="flex gap-6 mb-10 group">
-                    <div
-                        class="flex-shrink-0 w-12 h-12 rounded-full border-2 border-brand-purple-1 flex items-center justify-center brand-purple font-bold text-lg group-hover:bg-brand-purple group-hover:text-white transition-all">
-                        1
-                    </div>
-                    <div>
-                        <h4 class="text-xl font-bold text-slate-900 mb-2">Take the Quiz</h4>
-                        <p class="text-slate-500 leading-relaxed">Discover your skills and interests in just a few
-                            minutes.</p>
-                    </div>
-                </div>
-                <!-- Step Item 2 -->
-                <div class="flex gap-6 mb-10 group">
-                    <div
-                        class="flex-shrink-0 w-12 h-12 rounded-full border-2 border-brand-purple-1 flex items-center justify-center brand-purple font-bold text-lg group-hover:bg-brand-purple group-hover:text-white transition-all">
-                        2
-                    </div>
-                    <div>
-                        <h4 class="text-xl font-bold text-slate-900 mb-2">Get Your Roadmap</h4>
-                        <p class="text-slate-500 leading-relaxed">Follow a personalized path with clear steps to reach
-                            your goals.</p>
-                    </div>
-                </div>
-                <!-- Step Item 3 -->
-                <div class="flex gap-6 group">
-                    <div
-                        class="flex-shrink-0 w-12 h-12 rounded-full border-2 border-brand-purple-1 flex items-center justify-center brand-purple font-bold text-lg group-hover:bg-brand-purple group-hover:text-white transition-all">
-                        3
-                    </div>
-                    <div>
-                        <h4 class="text-xl font-bold text-slate-900 mb-2">Earn Your Certificate</h4>
-                        <p class="text-slate-500 leading-relaxed">Complete your roadmap and get certified to prove your
-                            skills.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- END: Journey Section -->
-    <!-- BEGIN: Testimonials Section -->
-    <section class="py-24 px-6 md:px-12 lg:px-24 bg-slate-100" id="testimonials">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-center text-3xl md:text-4xl font-extrabold text-slate-900 mb-16">
-                Trusted by 10,000+ professionals
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Testimonial 1 -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm flex flex-col justify-between"
-                    data-purpose="testimonial-card">
-                    <div>
-                        <div class="flex items-center gap-4 mb-6">
-                            <img alt="Sarah Jenkins" class="w-12 h-12 rounded-full border-2 border-brand-purple/20"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWzoDSjjh4TN6q7WvnoPN5RU6H5Gcb3E6JJj6KKR95jPrX0phFb_DxTuOckbdImvIu6l8VKMLOiFYHXfZwi3TTkuPrFaZmECy_5oiM2yeKNolMNEA7_7RGkjZUhjeIMaeJTtbJ-3OZmbQeyjJhUDPMnPiVG_FKiePaMuaQ4mkZ0YI83yMCR2ZNt8X8tYsuuVbwp-ngdNcahUyhGVb_eAjZUX8buQTxExDk8F-hlmiq5oFpC-MV9y7b_dBo0IA05xn5JklJ3LZfEnA" />
-                            <div>
-                                <h5 class="font-bold text-slate-900">Sarah Jenkins</h5>
-                                <p class="text-xs text-slate-500 font-medium">UX Designer @ TechFlow</p>
+                    )}
+                </nav>
+            );
+        }
+
+        function Hero() {
+            return (
+                <section style={{ padding: '72px 24px 96px', background: 'linear-gradient(135deg,#faf8ff 0%,#fff 50%,#f5f3ff 100%)', position: 'relative', overflow: 'hidden' }}>
+                    <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr', gap: 48, alignItems: 'center' }} className="hero-grid">
+                        <div className="fade-up-1">
+                            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#ede9fe', padding: '6px 14px', borderRadius: 99, marginBottom: 24 }}>
+                                <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--brand)', display: 'inline-block' }} />
+                                <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--brand)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Career Intelligence Platform</span>
+                            </div>
+                            <h1 className="syne" style={{ fontSize: 'clamp(42px,6vw,72px)', fontWeight: 800, lineHeight: 1.1, marginBottom: 24, color: '#0f0a1e' }}>
+                                Build Your<br /><span style={{ color: 'var(--brand)' }}>Career Now</span>
+                            </h1>
+                            <p style={{ fontSize: 18, color: '#6b7280', lineHeight: 1.7, maxWidth: 480, marginBottom: 40 }}>
+                                Discover your path, build skills, and unlock opportunities with our personalized career intelligence platform.
+                            </p>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
+                                <a href="explore.html" className="btn-primary">Get Started →</a>
+                                <a href="career-path.html" className="btn-outline">Explore Careers</a>
+                            </div>
+                            <div style={{ marginTop: 48, display: 'flex', gap: 32, flexWrap: 'wrap' }}>
+                                {[['10K+', 'Professionals'], ['95%', 'Success Rate'], ['50+', 'Career Paths']].map(([n, l]) => (
+                                    <div key={l}>
+                                        <div className="syne" style={{ fontSize: 28, fontWeight: 800, color: 'var(--brand)' }}>{n}</div>
+                                        <div style={{ fontSize: 13, color: '#9ca3af', fontWeight: 500 }}>{l}</div>
+                                    </div>
+                                ))}
                             </div>
                         </div>
-                        <p class="text-slate-600 leading-relaxed italic text-sm">
-                            " The platform truly provides a clear roadmap for the job market, with every step linked to
-                            in demand skills not just certificates. The focus is on actually gaining skills, not just
-                            collecting credentials "
-                        </p>
-                    </div>
-                </div>
-                <!-- Testimonial 2 -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm flex flex-col justify-between"
-                    data-purpose="testimonial-card">
-                    <div>
-                        <div class="flex items-center gap-4 mb-6">
-                            <img alt="Marcus Chen" class="w-12 h-12 rounded-full border-2 border-brand-purple/20"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC3vqMFu33Vg5oGQySUjDt-1gkYCHj3HyVBUdUmWGLYxQaeHX2TlsBURvMKFvnH6PCy10m89cQ7CRRP5kwZq1DxaB5-RLc8VJOKNr1i-4nXYP5JcynJd3k89Z3OYUps93GApeBvdmztyBVwjy5J4SidCoZBJCSxZu88CjWlK_2iFUR7m5RLlTGrYQmzPPuPIcj-U3W5CLPcO2mlzSxbQ815qoGsZb4w60lcMVL7s5BYSUcuaYUbA5kmXgUclq7nUhjS4k8-2mEyFc" />
-                            <div>
-                                <h5 class="font-bold text-slate-900">Marcus Chen</h5>
-                                <p class="text-xs text-slate-500 font-medium">Full-stack Developer @ Innovate</p>
+                        <div className="fade-up-2" style={{ position: 'relative', display: 'flex', justifyContent: 'center' }}>
+                            <div style={{ position: 'relative', maxWidth: 480, width: '100%' }}>
+                                <div style={{ position: 'absolute', inset: '-20px', background: 'radial-gradient(circle,rgba(99,54,199,0.1) 0%,transparent 70%)', borderRadius: '50%', zIndex: 0 }} />
+                                <img src="Images/Home-1.png" alt="Career Path" style={{ width: '100%', borderRadius: 24, position: 'relative', zIndex: 1, filter: 'drop-shadow(0 20px 60px rgba(99,54,199,0.2))' }} onError={e => { e.target.style.display = 'none' }} />
+                                <div className="float-tag" style={{ position: 'absolute', top: -16, right: -8, background: '#fff', padding: '10px 14px', borderRadius: 14, boxShadow: '0 8px 32px rgba(0,0,0,0.12)', display: 'flex', alignItems: 'center', gap: 10, zIndex: 2, whiteSpace: 'nowrap' }}>
+                                    <div style={{ width: 32, height: 32, background: '#fff7ed', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16 }}>💼</div>
+                                    <span style={{ fontSize: 13, fontWeight: 700, color: '#1a1033' }}>Job Opportunities</span>
+                                </div>
+                                <div className="float-tag-2" style={{ position: 'absolute', top: '25%', left: -16, background: '#fff', padding: '10px 14px', borderRadius: 14, boxShadow: '0 8px 32px rgba(0,0,0,0.12)', display: 'flex', alignItems: 'center', gap: 10, zIndex: 2, whiteSpace: 'nowrap' }}>
+                                    <div style={{ width: 32, height: 32, background: '#ede9fe', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16 }}>✔️</div>
+                                    <span style={{ fontSize: 13, fontWeight: 700, color: '#1a1033' }}>Certificates</span>
+                                </div>
+                                <div className="float-tag-3" style={{ position: 'absolute', bottom: '25%', right: -8, background: '#fff', padding: '10px 14px', borderRadius: 14, boxShadow: '0 8px 32px rgba(0,0,0,0.12)', display: 'flex', alignItems: 'center', gap: 10, zIndex: 2, whiteSpace: 'nowrap' }}>
+                                    <div style={{ width: 32, height: 32, background: '#f0fdf4', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16 }}>❓</div>
+                                    <span style={{ fontSize: 13, fontWeight: 700, color: '#1a1033' }}>Career Quiz</span>
+                                </div>
                             </div>
                         </div>
-                        <p class="text-slate-600 leading-relaxed italic text-sm">
-                            " The courses and certifications here are recognized in the industry, and each path comes
-                            with full transparency about what you'll learn and how it benefits your career "
-                        </p>
                     </div>
-                </div>
-                <!-- Testimonial 3 -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm flex flex-col justify-between"
-                    data-purpose="testimonial-card">
-                    <div>
-                        <div class="flex items-center gap-4 mb-6">
-                            <img alt="Elena Rodriguez" class="w-12 h-12 rounded-full border-2 border-brand-purple/20"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdbIuhxmKqsCQjFsk_x2eJgn4ov6mVMgP3rtOqD78-bgs9lYv20_6cTGX1AnQiJ2kgZqAFqVki1g8ASKBXNDh_qz_YnMaGC8NysKSpVvkNLd4U0M_Sd7GW854Nm2ljX9L9hF67a2Tf-yYO541HuXTFr_-wtlvq1VEO96dNAdMZR2eqxdCSzxOVQCw2_DKjWGhG9_CM3WKrTzmF1MO8E9SSMliyJA4gT83KASHyeTbiGl9W084iWeC08zXRzlmDH3pck9hoMmWVcTA" />
-                            <div>
-                                <h5 class="font-bold text-slate-900">Elena Rodriguez</h5>
-                                <p class="text-xs text-slate-500 font-medium">Product Manager @ GrowthLabs</p>
+                </section>
+            );
+        }
+
+        function Features() {
+            return (
+                <section id="features" style={{ padding: '96px 24px', background: '#fafbff' }}>
+                    <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+                        <div style={{ textAlign: 'center', marginBottom: 64 }}>
+                            <h2 className="syne" style={{ fontSize: 'clamp(28px,4vw,42px)', fontWeight: 800, marginBottom: 16 }}>
+                                Everything you need to <span style={{ color: 'var(--brand)' }}>build your career</span>
+                            </h2>
+                            <p style={{ color: '#6b7280', fontSize: 17, maxWidth: 480, margin: '0 auto' }}>All the tools you need in one place</p>
+                        </div>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 24 }}>
+                            {FEATURES.map((f, i) => (
+                                <div key={i} className="feature-card">
+                                    <div style={{ width: 56, height: 56, background: f.color, borderRadius: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24, marginBottom: 24 }}>{f.icon}</div>
+                                    <h3 className="syne" style={{ fontSize: 20, fontWeight: 700, marginBottom: 12 }}>{f.title}</h3>
+                                    <p style={{ color: '#6b7280', lineHeight: 1.7, fontSize: 15 }}>{f.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        function Journey() {
+            return (
+                <section id="journey" style={{ padding: '96px 24px' }}>
+                    <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr', gap: 64, alignItems: 'center' }} className="journey-grid">
+                        <div style={{ position: 'relative' }}>
+                            <div style={{ position: 'absolute', top: -16, left: -16, right: 16, bottom: 16, border: '2px solid #ede9fe', borderRadius: 24, zIndex: 0 }} />
+                            <img
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeZ74c8PgzPldLf7nS7PLuX03cpUDB3X9h-3LbuAYDV-kcqvFfvui3_lDjy_MoIKb7zHfXehWrp0XyWcFP2c70BLsAtIY6tkd4KIbsf_on9YsJ7yjpy9TX4DKmR7eudcGEUUwvgP3MXtcLxicLhmKMF8eF7dnOOtRD9jqlONbL9oba7oUHy__2TTJw1F8ThjGJ-LWTw-Ck-K9vvreKWu7V6Lb0uxJKx76Rv0tOx6ztI1ObBJWjHZB9f6eq_-2v7mDAP52dcB0oHFw"
+                                alt="Team collaborating"
+                                style={{ width: '100%', borderRadius: 20, boxShadow: '0 20px 60px rgba(99,54,199,0.12)', position: 'relative', zIndex: 1 }}
+                            />
+                        </div>
+                        <div>
+                            <h2 className="syne" style={{ fontSize: 'clamp(32px,4vw,48px)', fontWeight: 800, marginBottom: 48 }}>
+                                Your <span style={{ color: 'var(--brand)' }}>journey</span>
+                            </h2>
+                            {STEPS.map((s, i) => (
+                                <div key={i} className="step-row" style={{ display: 'flex', gap: 20, marginBottom: i < 2 ? 36 : 0, cursor: 'default' }}>
+                                    <div className="step-num">{s.n}</div>
+                                    <div>
+                                        <h4 className="syne" style={{ fontSize: 19, fontWeight: 700, marginBottom: 6 }}>{s.title}</h4>
+                                        <p style={{ color: '#6b7280', lineHeight: 1.6, fontSize: 15 }}>{s.desc}</p>
+                                    </div>
+                                </div>
+                            ))}
+                            <div style={{ marginTop: 40 }}>
+                                <a href="explore.html" className="btn-primary">Start Your Journey →</a>
                             </div>
                         </div>
-                        <p class="text-slate-600 leading-relaxed italic text-sm">
-                            " The best part is that every path is practical and hands-on, so you gain immediately
-                            applicable skills, boosting both your job prospects and confidence "
-                        </p>
                     </div>
+                </section>
+            );
+        }
+
+        function Testimonials() {
+            return (
+                <section style={{ padding: '96px 24px', background: 'linear-gradient(135deg,#faf8ff,#f5f3ff)' }}>
+                    <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+                        <h2 className="syne" style={{ textAlign: 'center', fontSize: 'clamp(28px,4vw,40px)', fontWeight: 800, marginBottom: 64 }}>
+                            Trusted by <span style={{ color: 'var(--brand)' }}>10,000+</span> professionals
+                        </h2>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 24 }}>
+                            {TESTIMONIALS.map((t, i) => (
+                                <div key={i} className="testimonial-card">
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 20 }}>
+                                        <img src={t.avatar} alt={t.name} style={{ width: 48, height: 48, borderRadius: '50%', border: '2px solid #ede9fe', objectFit: 'cover' }} onError={e => { e.target.style.display = 'none' }} />
+                                        <div>
+                                            <div style={{ fontWeight: 700, fontSize: 15 }}>{t.name}</div>
+                                            <div style={{ fontSize: 12, color: '#9ca3af', fontWeight: 500 }}>{t.role}</div>
+                                        </div>
+                                    </div>
+                                    <div style={{ display: 'flex', gap: 2, marginBottom: 14 }}>
+                                        {[...Array(5)].map((_, j) => <span key={j} style={{ color: '#f59e0b', fontSize: 14 }}>★</span>)}
+                                    </div>
+                                    <p style={{ color: '#6b7280', fontSize: 14, lineHeight: 1.7, fontStyle: 'italic' }}>"{t.text}"</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        function CTA() {
+            return (
+                <section style={{ padding: '96px 24px', background: 'linear-gradient(135deg,var(--brand),var(--brand-light))', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+                    <div style={{ position: 'absolute', top: -100, right: -100, width: 400, height: 400, background: 'rgba(255,255,255,0.06)', borderRadius: '50%' }} />
+                    <div style={{ position: 'absolute', bottom: -80, left: -80, width: 300, height: 300, background: 'rgba(255,255,255,0.04)', borderRadius: '50%' }} />
+                    <div style={{ position: 'relative', zIndex: 1 }}>
+                        <h2 className="syne" style={{ fontSize: 'clamp(28px,4vw,48px)', fontWeight: 800, color: '#fff', marginBottom: 16 }}>Ready to build your future?</h2>
+                        <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: 17, marginBottom: 40, maxWidth: 480, margin: '0 auto 40px' }}>Join thousands of professionals who found their path with Careery.</p>
+                        <a href="explore.html" style={{ background: '#fff', color: 'var(--brand)', fontWeight: 800, fontFamily: 'Syne,sans-serif', borderRadius: 14, padding: '16px 40px', fontSize: 16, display: 'inline-block', boxShadow: '0 8px 32px rgba(0,0,0,0.15)', transition: 'all 0.2s', textDecoration: 'none' }}>
+                            Start for Free →
+                        </a>
+                    </div>
+                </section>
+            );
+        }
+
+        function Footer() {
+            return (
+                <footer style={{ padding: '40px 24px', borderTop: '1px solid #f0eefe', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16, maxWidth: 1200, margin: '0 auto' }}>
+                    <span className="syne" style={{ fontSize: 20, fontWeight: 800, color: '#1a1033' }}>Careery</span>
+                    <p style={{ fontSize: 13, color: '#9ca3af' }}>© 2026 Careery | All rights reserved.</p>
+                </footer>
+            );
+        }
+
+        function App() {
+            return (
+                <div>
+                    <div className="bg-blob" /><div className="bg-blob-2" />
+                    <Nav />
+                    <Hero />
+                    <Features />
+                    <Journey />
+                    <Testimonials />
+                    <CTA />
+                    <Footer />
                 </div>
-            </div>
-        </div>
-    </section>
-    <!-- END: Testimonials Section -->
-    <!-- BEGIN: Footer -->
-    <footer class="py-8 px-6 md:px-12 lg:px-24 border-t border-slate-100">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex items-center">
-                <span class="text-xl font-extrabold tracking-tight">Careery</span>
-            </div>
-            <p class="text-sm text-slate-400 font-medium">
-                © 2025 Careery | All rights reserved.
-            </p>
-        </div>
-    </footer>
-    <!-- END: Footer -->
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <style>
+        @media(min-width:768px) {
+            .hero-grid {
+                grid-template-columns: 1fr 1fr !important;
+            }
+
+            .journey-grid {
+                grid-template-columns: 1fr 1fr !important;
+            }
+
+            .hidden-mobile {
+                display: flex !important;
+            }
+
+            .show-mobile {
+                display: none !important;
+            }
+        }
+
+        @media(max-width:767px) {
+            .hidden-mobile {
+                display: none !important;
+            }
+
+            .show-mobile {
+                display: block !important;
+            }
+
+            .float-tag,
+            .float-tag-2,
+            .float-tag-3 {
+                display: none;
+            }
+        }
+    </style>
 </body>
 
 </html>
