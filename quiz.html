@@ -1,198 +1,614 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Careery - Quiz Section</title>
-    <!-- Tailwind CSS v3 CDN with plugins -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <!-- Google Fonts for typography -->
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
-        rel="stylesheet" />
-    <style data-purpose="custom-config">
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Careery - Career Quiz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand: #6336c7;
+      --brand-light: #8b5cf6;
+      --brand-dark: #4c1d95;
+      --brand-glow: rgba(99,54,199,0.18);
+      --accent: #f472b6;
+      --bg: #f0eefc;
+      --card: #ffffff;
+      --text: #1a1033;
+      --muted: #6b7280;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      min-height: 100vh;
+      color: var(--text);
+    }
+    h1, h2, h3, .syne { font-family: 'Syne', sans-serif; }
 
-        .brand-purple {
-            color: #6336c7;
-        }
+    /* Animated gradient bg blob */
+    .bg-blob {
+      position: fixed; top: -200px; right: -200px; width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(139,92,246,0.15) 0%, transparent 70%);
+      border-radius: 50%; pointer-events: none; z-index: 0;
+      animation: blobPulse 8s ease-in-out infinite;
+    }
+    .bg-blob-2 {
+      position: fixed; bottom: -150px; left: -150px; width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(244,114,182,0.10) 0%, transparent 70%);
+      border-radius: 50%; pointer-events: none; z-index: 0;
+      animation: blobPulse 10s ease-in-out infinite reverse;
+    }
+    @keyframes blobPulse {
+      0%, 100% { transform: scale(1) translate(0,0); }
+      50% { transform: scale(1.1) translate(20px, -20px); }
+    }
 
-        .bg-brand-purple {
-            background-color: #6336c7;
-        }
+    /* Option card */
+    .option-card {
+      transition: all 0.2s cubic-bezier(.4,0,.2,1);
+      border: 2px solid #e5e7eb;
+      background: white;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .option-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(99,54,199,0.06), rgba(139,92,246,0.04));
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .option-card:hover { border-color: var(--brand); transform: translateY(-1px); box-shadow: 0 4px 20px var(--brand-glow); }
+    .option-card:hover::before { opacity: 1; }
+    .option-card.selected {
+      border-color: var(--brand);
+      background: linear-gradient(135deg, #ede9fe, #f5f3ff);
+      box-shadow: 0 4px 24px var(--brand-glow);
+      transform: translateY(-1px);
+    }
+    .option-card.correct { border-color: #10b981; background: #ecfdf5; }
+    .option-card.wrong { border-color: #ef4444; background: #fef2f2; }
 
-        .border-brand-purple {
-            border-color: #6336c7;
-        }
+    /* Progress bar */
+    .progress-fill {
+      background: linear-gradient(90deg, var(--brand), var(--brand-light));
+      transition: width 0.5s cubic-bezier(.4,0,.2,1);
+      border-radius: 99px;
+    }
 
-        /* Custom shadow for the quiz card */
-        .card-shadow {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
-    </style>
+    /* Slide animation */
+    .slide-in {
+      animation: slideIn 0.35s cubic-bezier(.4,0,.2,1) forwards;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .slide-out {
+      animation: slideOut 0.25s cubic-bezier(.4,0,.2,1) forwards;
+    }
+    @keyframes slideOut {
+      from { opacity: 1; transform: translateX(0); }
+      to { opacity: 0; transform: translateX(-30px); }
+    }
+
+    /* Result score ring */
+    .score-ring {
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      background: conic-gradient(var(--brand) calc(var(--pct) * 1%), #e5e7eb 0%);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 40px var(--brand-glow);
+      position: relative;
+    }
+    .score-ring-inner {
+      width: 108px; height: 108px;
+      border-radius: 50%; background: white;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column;
+    }
+
+    /* Stepper */
+    .step-dot { transition: all 0.3s; }
+
+    /* Button */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand), var(--brand-light));
+      color: white; font-weight: 600; border-radius: 14px;
+      padding: 14px 32px; cursor: pointer;
+      transition: all 0.2s; font-family: 'Syne', sans-serif;
+      letter-spacing: 0.01em;
+      box-shadow: 0 4px 20px var(--brand-glow);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px var(--brand-glow); }
+    .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+    .btn-secondary {
+      background: white; color: var(--text); font-weight: 600; border-radius: 14px;
+      padding: 14px 32px; cursor: pointer; border: 2px solid #e5e7eb;
+      transition: all 0.2s; font-family: 'Syne', sans-serif;
+    }
+    .btn-secondary:hover { border-color: var(--brand); background: #faf8ff; }
+
+    /* Category badge */
+    .cat-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 12px; border-radius: 99px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    .cat-prog { background: #ede9fe; color: #6336c7; }
+    .cat-net { background: #f0fdf4; color: #16a34a; }
+    .cat-telecom { background: #fff7ed; color: #ea580c; }
+
+    @media (max-width: 640px) {
+      .option-card { padding: 14px 16px !important; }
+      .btn-primary, .btn-secondary { padding: 12px 20px; font-size: 14px; }
+    }
+  </style>
 </head>
+<body>
+<div id="root"></div>
 
-<body class="min-h-screen flex flex-col">
-    <!-- BEGIN: MainHeader -->
-    <header class="bg-white border-b border-gray-100 px-8 py-4 flex items-center justify-between sticky top-0 z-50"
-        data-purpose="navigation-bar">
-        <div class="flex items-center gap-2">
-            <!-- Careery Logo Placeholder -->
-            <span class="text-2xl font-extrabold brand-purple tracking-tight">Careery</span>
-        </div>
-        <div class="flex items-center gap-6">
-            <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
-                <a class="hover:text-gray-900" href="#">My Progress</a>
-            </nav>
-            <div class="flex items-center gap-4">
-                <button class="text-gray-500 hover:text-gray-700">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                    </svg>
-                </button>
-                <div
-                    class="w-10 h-10 rounded-full bg-brand-purple text-white flex items-center justify-center font-semibold text-sm">
-                    MZ
-                </div>
+<script type="text/babel">
+const { useState, useEffect, useRef } = React;
+
+const QUESTIONS = [
+  {
+    id: 1, category: "networking",
+    question: "Which device is used to connect multiple networks together?",
+    options: ["Switch", "Router", "Hub", "Modem"],
+    answer: 1,
+    explanation: "A router connects multiple networks and directs data packets between them using IP addresses."
+  },
+  {
+    id: 2, category: "programming",
+    question: "What does HTML stand for?",
+    options: [
+      "Hypertext Markup Language",
+      "Hyper Transfer Markup Layout",
+      "High-level Text Markup Language",
+      "Hypertext Machine Language"
+    ],
+    answer: 0,
+    explanation: "HTML (HyperText Markup Language) is the standard markup language for creating web pages."
+  },
+  {
+    id: 3, category: "networking",
+    question: "Which OSI layer is responsible for end-to-end communication and error recovery?",
+    options: ["Network Layer", "Data Link Layer", "Transport Layer", "Session Layer"],
+    answer: 2,
+    explanation: "The Transport Layer (Layer 4) handles end-to-end communication, error recovery, and flow control via TCP/UDP."
+  },
+  {
+    id: 4, category: "programming",
+    question: "In programming, what is a 'function' most accurately described as?",
+    options: [
+      "A type of variable",
+      "A reusable block of code that performs a specific task",
+      "A conditional statement",
+      "A data storage structure"
+    ],
+    answer: 1,
+    explanation: "A function is a reusable, self-contained block of code designed to perform a specific task."
+  },
+  {
+    id: 5, category: "telecom",
+    question: "What does 5G primarily improve over 4G networks?",
+    options: [
+      "Battery life of devices",
+      "Screen resolution",
+      "Speed, latency, and capacity",
+      "GPS accuracy"
+    ],
+    answer: 2,
+    explanation: "5G significantly improves data speed, reduces latency to under 1ms, and massively increases network capacity for IoT devices."
+  },
+  {
+    id: 6, category: "networking",
+    question: "What is the primary purpose of a firewall?",
+    options: [
+      "Increase internet speed",
+      "Monitor and filter network traffic based on security rules",
+      "Assign IP addresses dynamically",
+      "Convert domain names to IP addresses"
+    ],
+    answer: 1,
+    explanation: "A firewall monitors and filters incoming/outgoing network traffic according to predefined security rules."
+  },
+  {
+    id: 7, category: "programming",
+    question: "Which data structure follows the LIFO (Last In, First Out) principle?",
+    options: ["Queue", "Linked List", "Stack", "Tree"],
+    answer: 2,
+    explanation: "A Stack follows LIFO — the last element added is the first one removed, like a stack of plates."
+  },
+  {
+    id: 8, category: "telecom",
+    question: "What is the role of a protocol in telecommunications?",
+    options: [
+      "To physically connect devices",
+      "A set of rules governing data communication between devices",
+      "To amplify signals over long distances",
+      "To encrypt all wireless data"
+    ],
+    answer: 1,
+    explanation: "A protocol is a standardized set of rules that defines how data is transmitted and received between devices."
+  },
+  {
+    id: 9, category: "programming",
+    question: "What is the time complexity of binary search on a sorted array?",
+    options: ["O(n)", "O(n²)", "O(log n)", "O(1)"],
+    answer: 2,
+    explanation: "Binary search has O(log n) complexity because it halves the search space with each comparison."
+  },
+  {
+    id: 10, category: "networking",
+    question: "Which protocol is used to automatically assign IP addresses to devices on a network?",
+    options: ["FTP", "DHCP", "DNS", "HTTP"],
+    answer: 1,
+    explanation: "DHCP (Dynamic Host Configuration Protocol) automatically assigns IP addresses and network configuration to devices."
+  },
+  {
+    id: 11, category: "telecom",
+    question: "What does IoT stand for?",
+    options: [
+      "Internet of Technology",
+      "Infrastructure of Things",
+      "Internet of Things",
+      "Integration of Telecoms"
+    ],
+    answer: 2,
+    explanation: "IoT (Internet of Things) refers to the network of physical devices connected to the internet to collect and share data."
+  },
+  {
+    id: 12, category: "programming",
+    question: "In object-oriented programming, what is 'encapsulation'?",
+    options: [
+      "Inheriting properties from a parent class",
+      "Bundling data and methods that operate on it within one unit",
+      "Overriding parent class methods",
+      "Creating multiple instances of a class"
+    ],
+    answer: 1,
+    explanation: "Encapsulation bundles data and the methods that manipulate it within a single unit (class), hiding internal details."
+  },
+];
+
+const CAT_META = {
+  programming: { label: "Programming", cls: "cat-prog", icon: "💻" },
+  networking:  { label: "Networking",  cls: "cat-net",  icon: "🌐" },
+  telecom:     { label: "Telecom",     cls: "cat-telecom", icon: "📡" },
+};
+
+const STEPPER = [
+  { label: "Explore", icon: "🔍" },
+  { label: "Quiz",    icon: "📋" },
+  { label: "Roadmap", icon: "🗺️" },
+];
+
+function Stepper({ active }) {
+  return (
+    <div className="relative mb-12 mt-2">
+      <div style={{position:'absolute',top:'20px',left:'10%',right:'10%',height:'2px',background:'#e5e7eb',zIndex:0}}/>
+      <div className="flex justify-between items-start relative" style={{zIndex:1}}>
+        {STEPPER.map((s, i) => (
+          <div key={i} className="flex flex-col items-center gap-2" style={{width:'100px'}}>
+            <div className="step-dot w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold shadow-sm"
+              style={{
+                background: i === active ? 'linear-gradient(135deg,#6336c7,#8b5cf6)' : 'white',
+                border: `2px solid ${i === active ? '#6336c7' : '#e5e7eb'}`,
+                color: i === active ? 'white' : '#9ca3af',
+                boxShadow: i === active ? '0 4px 16px rgba(99,54,199,0.25)' : undefined,
+              }}>
+              {s.icon}
             </div>
+            <span className="text-center font-bold uppercase tracking-widest" style={{
+              fontSize:'9px',
+              color: i === active ? '#6336c7' : '#9ca3af'
+            }}>
+              Step {i+1}: {s.label}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ResultScreen({ answers, onRetry }) {
+  const score = answers.filter(a => a.correct).length;
+  const pct = Math.round((score / QUESTIONS.length) * 100);
+  const byCategory = {};
+  QUESTIONS.forEach((q, i) => {
+    if (!byCategory[q.category]) byCategory[q.category] = { total: 0, correct: 0 };
+    byCategory[q.category].total++;
+    if (answers[i]?.correct) byCategory[q.category].correct++;
+  });
+
+  let verdict, verdictColor, verdictBg;
+  if (pct >= 80) { verdict = "Outstanding!"; verdictColor = "#6336c7"; verdictBg = "#ede9fe"; }
+  else if (pct >= 60) { verdict = "Good Work!"; verdictColor = "#16a34a"; verdictBg = "#ecfdf5"; }
+  else if (pct >= 40) { verdict = "Keep Practicing"; verdictColor = "#d97706"; verdictBg = "#fffbeb"; }
+  else { verdict = "Keep Going!"; verdictColor = "#dc2626"; verdictBg = "#fef2f2"; }
+
+  return (
+    <div className="slide-in">
+      <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100 mb-6">
+        <div className="text-center mb-10">
+          <div style={{display:'inline-flex',alignItems:'center',gap:8,padding:'6px 16px',borderRadius:99,background:verdictBg,color:verdictColor,fontWeight:700,fontSize:13,marginBottom:16}}>
+            🏆 {verdict}
+          </div>
+          <h2 className="syne text-3xl md:text-4xl font-bold mb-2" style={{color:'var(--text)'}}>Quiz Complete</h2>
+          <p style={{color:'var(--muted)',fontSize:15}}>Here's how you performed across all categories</p>
         </div>
-    </header>
-    <!-- END: MainHeader -->
-    <main class="flex-grow container mx-auto max-w-5xl px-4 py-12" data-purpose="main-content">
-        <!-- BEGIN: StepperIndicator -->
-        <div class="mb-16 relative" data-purpose="stepper">
-            <!-- Connection Lines -->
-            <div class="w-[90%] absolute top-5 left-[5%] right-[15%] h-0.5 bg-gray-200 -z-10"></div>
-            <div class="flex justify-between items-start">
-                <!-- Step 1 -->
-                <div class="flex flex-col items-center gap-3 w-32">
-                    <div
-                        class="w-10 h-10 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center text-gray-400">
-                        <svg class="h-5 w-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path clip-rule="evenodd"
-                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-                                fill-rule="evenodd"></path>
-                        </svg>
+
+        {/* Score ring */}
+        <div className="flex justify-center mb-10">
+          <div className="score-ring" style={{'--pct': pct}}>
+            <div className="score-ring-inner">
+              <span className="syne font-bold" style={{fontSize:32,color:'#6336c7',lineHeight:1}}>{pct}%</span>
+              <span style={{fontSize:11,color:'var(--muted)',fontWeight:600}}>{score}/{QUESTIONS.length} correct</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Category breakdown */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          {Object.entries(byCategory).map(([cat, stats]) => {
+            const meta = CAT_META[cat];
+            const catPct = Math.round((stats.correct / stats.total) * 100);
+            return (
+              <div key={cat} className="rounded-2xl p-5 border" style={{borderColor:'#e5e7eb',background:'#fafafa'}}>
+                <div className="flex items-center gap-2 mb-3">
+                  <span style={{fontSize:18}}>{meta.icon}</span>
+                  <span className="font-bold" style={{fontSize:13,color:'var(--text)'}}>{meta.label}</span>
+                </div>
+                <div className="flex justify-between items-end mb-2">
+                  <span style={{fontSize:12,color:'var(--muted)'}}>{stats.correct}/{stats.total}</span>
+                  <span className="font-bold" style={{fontSize:13,color:'#6336c7'}}>{catPct}%</span>
+                </div>
+                <div style={{height:6,borderRadius:99,background:'#e5e7eb',overflow:'hidden'}}>
+                  <div className="progress-fill" style={{width:`${catPct}%`,height:'100%'}}/>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Q&A review */}
+        <div className="mb-8">
+          <h3 className="syne font-bold text-lg mb-4" style={{color:'var(--text)'}}>Review Your Answers</h3>
+          <div className="space-y-3">
+            {QUESTIONS.map((q, i) => {
+              const ans = answers[i];
+              const correct = ans?.correct;
+              return (
+                <div key={q.id} className="rounded-xl p-4 border" style={{
+                  borderColor: correct ? '#a7f3d0' : '#fecaca',
+                  background: correct ? '#f0fdf4' : '#fef2f2'
+                }}>
+                  <div className="flex items-start gap-3">
+                    <span style={{fontSize:16,flexShrink:0,marginTop:2}}>{correct ? '✅' : '❌'}</span>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-semibold text-sm mb-1" style={{color:'var(--text)'}}>{q.question}</p>
+                      {!correct && (
+                        <p style={{fontSize:12,color:'#6b7280'}}>
+                          Your answer: <span style={{color:'#dc2626',fontWeight:600}}>{q.options[ans?.selected]}</span>
+                          {' · '}Correct: <span style={{color:'#16a34a',fontWeight:600}}>{q.options[q.answer]}</span>
+                        </p>
+                      )}
+                      <p style={{fontSize:12,color:'#6b7280',marginTop:4,fontStyle:'italic'}}>{q.explanation}</p>
                     </div>
-                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest text-center">Step 1:
-                        Explore</span>
+                  </div>
                 </div>
-                <!-- Step 2 (Active) -->
-                <div class="flex flex-col items-center gap-3 w-32">
-                    <div
-                        class="w-10 h-10 rounded-full bg-brand-purple flex items-center justify-center text-white shadow-lg">
-                        <svg class="h-5 w-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-                            <path clip-rule="evenodd"
-                                d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
-                                fill-rule="evenodd"></path>
-                        </svg>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <button className="btn-secondary" onClick={onRetry}>🔄 Retake Quiz</button>
+          <a href="roadmap.html">
+            <button className="btn-primary w-full sm:w-auto">View My Roadmap →</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function QuizApp() {
+  const [current, setCurrent] = useState(0);
+  const [selected, setSelected] = useState(null);
+  const [revealed, setRevealed] = useState(false);
+  const [answers, setAnswers] = useState([]);
+  const [done, setDone] = useState(false);
+  const [animating, setAnimating] = useState(false);
+  const cardRef = useRef(null);
+
+  const q = QUESTIONS[current];
+  const progress = Math.round(((current) / QUESTIONS.length) * 100);
+
+  function handleSelect(idx) {
+    if (revealed) return;
+    setSelected(idx);
+    setRevealed(true);
+  }
+
+  function handleNext() {
+    if (selected === null) return;
+    const newAnswers = [...answers, { selected, correct: selected === q.answer }];
+    setAnimating(true);
+    setTimeout(() => {
+      setAnswers(newAnswers);
+      if (current + 1 >= QUESTIONS.length) {
+        setDone(true);
+      } else {
+        setCurrent(current + 1);
+        setSelected(null);
+        setRevealed(false);
+      }
+      setAnimating(false);
+    }, 250);
+  }
+
+  function handleBack() {
+    if (current === 0) return;
+    setAnimating(true);
+    setTimeout(() => {
+      setCurrent(current - 1);
+      const prev = answers[current - 1];
+      setSelected(prev ? prev.selected : null);
+      setRevealed(prev ? true : false);
+      setAnswers(answers.slice(0, current - 1));
+      setAnimating(false);
+    }, 250);
+  }
+
+  function handleRetry() {
+    setCurrent(0); setSelected(null); setRevealed(false);
+    setAnswers([]); setDone(false);
+  }
+
+  const meta = CAT_META[q?.category];
+
+  return (
+    <div style={{minHeight:'100vh',background:'var(--bg)'}}>
+      <div className="bg-blob"/><div className="bg-blob-2"/>
+      {/* Header */}
+      <header style={{background:'white',borderBottom:'1px solid #f1f0fe',position:'sticky',top:0,zIndex:50}}>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+          <span className="syne font-bold text-xl" style={{color:'#6336c7'}}>Careery</span>
+          <div className="flex items-center gap-3">
+            <span style={{fontSize:12,color:'var(--muted)',fontWeight:600,display:'none'}} className="sm:inline">My Progress</span>
+            <div className="w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-bold"
+              style={{background:'linear-gradient(135deg,#6336c7,#8b5cf6)'}}>MZ</div>
+          </div>
+        </div>
+      </header>
+
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-8 md:py-12 relative" style={{zIndex:1}}>
+        <Stepper active={1} />
+
+        {!done ? (
+          <>
+            {/* Progress */}
+            <div className="mb-6">
+              <div className="flex justify-between items-center mb-2">
+                <span className="syne font-bold" style={{fontSize:15,color:'var(--text)'}}>
+                  Question {current + 1} <span style={{color:'var(--muted)',fontWeight:500}}>of {QUESTIONS.length}</span>
+                </span>
+                <span className="font-bold" style={{fontSize:14,color:'#6336c7'}}>{progress}%</span>
+              </div>
+              <div style={{height:8,borderRadius:99,background:'#e5e7eb',overflow:'hidden'}}>
+                <div className="progress-fill" style={{width:`${progress}%`,height:'100%'}}/>
+              </div>
+            </div>
+
+            {/* Card */}
+            <div ref={cardRef} className={animating ? 'slide-out' : 'slide-in'}
+              style={{background:'white',borderRadius:24,padding:'clamp(24px,5vw,48px)',
+                boxShadow:'0 4px 40px rgba(99,54,199,0.07)',border:'1px solid #f0eefe',marginBottom:24}}>
+
+              <div className="flex items-center gap-2 mb-5">
+                <span className={`cat-badge ${meta?.cls}`}>{meta?.icon} {meta?.label}</span>
+                <span style={{fontSize:12,color:'var(--muted)',fontWeight:500}}>Q{q.id}</span>
+              </div>
+
+              <h2 className="syne font-bold leading-snug mb-8"
+                style={{fontSize:'clamp(18px,3.5vw,26px)',color:'var(--text)'}}>
+                {q.question}
+              </h2>
+
+              <div className="space-y-3 mb-8">
+                {q.options.map((opt, idx) => {
+                  let extraClass = '';
+                  if (revealed) {
+                    if (idx === q.answer) extraClass = 'correct';
+                    else if (idx === selected && idx !== q.answer) extraClass = 'wrong';
+                  } else if (idx === selected) extraClass = 'selected';
+
+                  return (
+                    <div key={idx}
+                      className={`option-card rounded-2xl px-5 py-4 flex items-center gap-4 ${extraClass}`}
+                      onClick={() => handleSelect(idx)}
+                      role="button" tabIndex={0}
+                      onKeyDown={e => e.key === 'Enter' && handleSelect(idx)}>
+                      <span style={{
+                        width:32,height:32,borderRadius:8,flexShrink:0,
+                        background: revealed && idx === q.answer ? '#d1fae5'
+                          : revealed && idx === selected && idx !== q.answer ? '#fee2e2'
+                          : idx === selected ? '#ede9fe' : '#f3f4f6',
+                        color: revealed && idx === q.answer ? '#10b981'
+                          : revealed && idx === selected && idx !== q.answer ? '#ef4444'
+                          : idx === selected ? '#6336c7' : '#9ca3af',
+                        display:'flex',alignItems:'center',justifyContent:'center',
+                        fontSize:13,fontWeight:700,fontFamily:'Syne,sans-serif',
+                        transition:'all 0.2s'
+                      }}>
+                        {revealed && idx === q.answer ? '✓'
+                          : revealed && idx === selected && idx !== q.answer ? '✗'
+                          : String.fromCharCode(65+idx)}
+                      </span>
+                      <span style={{fontWeight:500,fontSize:15,color:'var(--text)',flex:1}}>{opt}</span>
                     </div>
-                    <span class="text-[10px] font-bold brand-purple uppercase tracking-widest text-center">Step 2:
-                        Quiz</span>
+                  );
+                })}
+              </div>
+
+              {/* Explanation */}
+              {revealed && (
+                <div className="slide-in rounded-2xl px-5 py-4 mb-2"
+                  style={{background:'#f5f3ff',border:'1px solid #ddd6fe'}}>
+                  <p style={{fontSize:13,color:'#4c1d95',fontWeight:500,lineHeight:1.6}}>
+                    💡 <strong>Explanation:</strong> {q.explanation}
+                  </p>
                 </div>
-                <!-- Step 3 -->
-                <div class="flex flex-col items-center gap-3 w-32">
-                    <div
-                        class="w-10 h-10 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center text-gray-400">
-                        <svg class="h-5 w-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path clip-rule="evenodd"
-                                d="M12 1.586l-4 4v12.828l4-4V1.586zM3.707 3.293A1 1 0 002 4v10a1 1 0 00.293.707L6 18.414V5.586L3.707 3.293zM17.707 5.293L14 1.586v12.828l2.293 2.293A1 1 0 0018 16V6a1 1 0 00-.293-.707z"
-                                fill-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest text-center">Step 3:
-                        Roadmap</span>
-                </div>
+              )}
             </div>
-        </div>
-        <!-- END: StepperIndicator -->
-        <!-- BEGIN: ProgressSection -->
-        <div class="mb-8" data-purpose="progress-display">
-            <div class="flex justify-between items-end mb-3">
-                <h2 class="text-lg font-semibold text-gray-800">Question 3 of 10</h2>
-                <span class="text-sm font-bold brand-purple">30% Complete</span>
+
+            {/* Navigation */}
+            <div className="flex justify-between items-center gap-3">
+              <button className="btn-secondary flex items-center gap-2" onClick={handleBack} disabled={current === 0}>
+                ← Back
+              </button>
+              <div className="flex gap-1">
+                {QUESTIONS.map((_, i) => (
+                  <div key={i} style={{
+                    width: i === current ? 20 : 8, height:8, borderRadius:99,
+                    background: i < answers.length
+                      ? (answers[i]?.correct ? '#10b981' : '#ef4444')
+                      : i === current ? '#6336c7' : '#e5e7eb',
+                    transition:'all 0.3s'
+                  }}/>
+                ))}
+              </div>
+              <button className="btn-primary flex items-center gap-2"
+                onClick={handleNext}
+                disabled={selected === null}>
+                {current + 1 === QUESTIONS.length ? 'Finish 🎉' : 'Next →'}
+              </button>
             </div>
-            <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
-                <div class="bg-brand-purple h-full w-[30%]" data-purpose="progress-bar-fill"></div>
-            </div>
+          </>
+        ) : (
+          <ResultScreen answers={answers} onRetry={handleRetry} />
+        )}
+      </main>
+
+      <footer style={{background:'white',borderTop:'1px solid #f1f0fe',padding:'24px',marginTop:40}}>
+        <div className="max-w-5xl mx-auto flex justify-between items-center" style={{color:'var(--muted)',fontSize:13}}>
+          <span className="syne font-bold" style={{color:'var(--text)',fontSize:16}}>Careery</span>
+          <span>© 2026 Careery | All rights reserved.</span>
         </div>
-        <!-- END: ProgressSection -->
-        <!-- BEGIN: QuizCard -->
-        <div class="bg-white rounded-2xl card-shadow p-12 mb-12" data-purpose="quiz-container">
-            <h1 class="text-3xl font-bold text-gray-800 mb-10 max-w-2xl leading-tight">
-                Which device is used to connect multiple networks together?
-            </h1>
-            <form class="space-y-4" data-purpose="quiz-form">
-                <!-- Option 1 -->
-                <label
-                    class="flex items-center p-5 bg-gray-50 border border-transparent rounded-xl cursor-pointer hover:border-brand-purple transition-all group">
-                    <input class="hidden peer" name="network-device" type="radio" value="switch" />
-                    <span class="text-gray-700 font-medium group-hover:text-brand-purple">Switch</span>
-                </label>
-                <!-- Option 2 -->
-                <label
-                    class="flex items-center p-5 bg-gray-50 border border-transparent rounded-xl cursor-pointer hover:border-brand-purple transition-all group">
-                    <input class="hidden peer" name="network-device" type="radio" value="router" />
-                    <span class="text-gray-700 font-medium group-hover:text-brand-purple">Router</span>
-                </label>
-                <!-- Option 3 -->
-                <label
-                    class="flex items-center p-5 bg-gray-50 border border-transparent rounded-xl cursor-pointer hover:border-brand-purple transition-all group">
-                    <input class="hidden peer" name="network-device" type="radio" value="hub" />
-                    <span class="text-gray-700 font-medium group-hover:text-brand-purple">Hub</span>
-                </label>
-                <!-- Option 4 -->
-                <label
-                    class="flex items-center p-5 bg-gray-50 border border-transparent rounded-xl cursor-pointer hover:border-brand-purple transition-all group">
-                    <input class="hidden peer" name="network-device" type="radio" value="modem" />
-                    <span class="text-gray-700 font-medium group-hover:text-brand-purple">Modem</span>
-                </label>
-            </form>
-            <!-- BEGIN: NavigationButtons -->
-            <div class="mt-12 flex justify-between items-center" data-purpose="navigation-buttons">
-                <button
-                    class="px-8 py-3 rounded-xl border border-gray-200 text-gray-600 font-semibold hover:bg-gray-50 flex items-center gap-2 transition-colors">
-                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linecap="round" stroke-linejoin="round"
-                            stroke-width="2"></path>
-                    </svg>
-                    Back
-                </button>
-                <a href="roadmap.html"
-                    class="px-10 py-3 rounded-xl bg-brand-purple text-white font-semibold hover:bg-opacity-90 flex items-center gap-2 transition-colors shadow-lg shadow-purple-200">
-                    Next
-                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round"
-                            stroke-width="2"></path>
-                    </svg>
-                </a>
-            </div>
-            <!-- END: NavigationButtons -->
-        </div>
-        <!-- END: QuizCard -->
-    </main>
-    <!-- BEGIN: Footer -->
-    <footer class="bg-white border-t border-gray-100 py-6 px-8" data-purpose="footer">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <span class="text-lg font-bold text-gray-800">Careery</span>
-            <p class="text-sm text-gray-500">
-                © 2026 Careery | All rights reserved.
-            </p>
-        </div>
-    </footer>
-    <!-- END: Footer -->
+      </footer>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<QuizApp />);
+</script>
 </body>
-
 </html>
