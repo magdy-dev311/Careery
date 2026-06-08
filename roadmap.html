@@ -327,6 +327,54 @@
 
                         {/* Hero */}
                         <div style={{ textAlign: 'center', marginBottom: 40, position: 'relative' }}>
+
+                            {/* ── Recommendations Banner ── */}
+                            <a href="recommendation.html" style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                                background: 'linear-gradient(135deg,#1a1033,#2d1b69)',
+                                borderRadius: 20,
+                                padding: '18px 24px',
+                                marginBottom: 36,
+                                textDecoration: 'none',
+                                boxShadow: '0 8px 32px rgba(99,54,199,0.35)',
+                                border: '1px solid rgba(139,92,246,0.3)',
+                                transition: 'all 0.2s',
+                                cursor: 'pointer',
+                            }}
+                            onMouseEnter={e => e.currentTarget.style.transform='translateY(-2px)'}
+                            onMouseLeave={e => e.currentTarget.style.transform='translateY(0)'}
+                            >
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                                    <div style={{
+                                        width: 48, height: 48, borderRadius: 14,
+                                        background: 'linear-gradient(135deg,#6336c7,#8b5cf6)',
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                        fontSize: 22, flexShrink: 0,
+                                        boxShadow: '0 4px 16px rgba(99,54,199,0.5)',
+                                    }}>✨</div>
+                                    <div style={{ textAlign: 'left' }}>
+                                        <div style={{ fontSize: 11, fontWeight: 700, color: '#8b5cf6', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 3 }}>
+                                            Curated for you
+                                        </div>
+                                        <div className="syne" style={{ fontSize: 16, fontWeight: 800, color: '#fff', marginBottom: 2 }}>
+                                            Explore Recommendations
+                                        </div>
+                                        <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)' }}>
+                                            Top experts · Podcasts · Books · Resources
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style={{
+                                    width: 36, height: 36, borderRadius: '50%',
+                                    background: 'rgba(139,92,246,0.25)',
+                                    border: '1px solid rgba(139,92,246,0.4)',
+                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                    color: '#8b5cf6', fontSize: 18, flexShrink: 0,
+                                }}>→</div>
+                            </a>
+
                             <h1 className="syne" style={{ fontSize: 'clamp(32px,5vw,52px)', fontWeight: 800, marginBottom: 12 }}>Your Roadmap</h1>
                             <p style={{ color: '#6b7280', fontSize: 16, maxWidth: 500, margin: '0 auto' }}>
                                 Follow this curated sequence of learning and building to reach your professional pinnacle.
