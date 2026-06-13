@@ -130,6 +130,11 @@ function ResultScreen({answers,onRetry,lang,total}){
   const wm=META[winner][lang];
   const isRTL=lang==="ar";
 
+  // Save specialization to localStorage so roadmap.html can read it
+  React.useEffect(()=>{
+    try{localStorage.setItem("careery_specialization",winner);}catch(e){}
+  },[winner]);
+
   return(
     <div className="slide-in" dir={t.dir}>
       <div style={{borderRadius:24,padding:"clamp(24px,6vw,44px)",marginBottom:18,textAlign:"center",
@@ -172,9 +177,10 @@ function ResultScreen({answers,onRetry,lang,total}){
 
       <div style={{display:"flex",flexDirection:"column",gap:10,alignItems:"center"}}>
         <button className="btn-secondary" onClick={onRetry} style={{width:"100%",maxWidth:340}}>{t.rt}</button>
-        <a href="roadmap.html" style={{width:"100%",maxWidth:340}}>
-          <button className="btn-primary" style={{width:"100%"}}>{t.rm}</button>
-        </a>
+        <button className="btn-primary" style={{width:"100%",maxWidth:340}} onClick={()=>{
+          try{localStorage.setItem("careery_specialization",winner);}catch(e){}
+          window.location.href="roadmap.html?spec="+winner;
+        }}>{t.rm}</button>
       </div>
     </div>
   );
