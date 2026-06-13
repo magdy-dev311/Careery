@@ -2,27 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Careery - My Roadmap</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Careery - Your Roadmap</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <script src="app.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
   <style>
-    :root{--brand:#6336c7;--brand-light:#8b5cf6;--brand-glow:rgba(99,54,199,0.18);}
+    :root{--brand:#6336c7;--brand-light:#8b5cf6;--brand-glow:rgba(99,54,199,0.15);}
     *{box-sizing:border-box;margin:0;padding:0;}
     body{font-family:'DM Sans',sans-serif;background:#f8f7ff;color:#1a1033;}
-    h1,h2,h3,.syne{font-family:'Syne',sans-serif;}
+    h1,h2,h3,h4,.syne{font-family:'Syne',sans-serif;}
     a{text-decoration:none;}
-    .card{background:#fff;border:1.5px solid #ede9fe;border-radius:16px;padding:18px 20px;display:flex;align-items:center;gap:16px;margin-bottom:12px;transition:all .2s;}
-    .card.done{border-color:#bbf7d0;background:#f0fdf4;}
-    .checkbox{width:28px;height:28px;border-radius:50%;border:2px solid #d1d5db;flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;}
-    .checkbox.done{background:#16a34a;border-color:#16a34a;color:#fff;}
-    .explore-banner{background:linear-gradient(135deg,var(--brand),var(--brand-light));border-radius:20px;padding:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;color:#fff;margin-bottom:32px;}
-    .btn-white{background:#fff;color:var(--brand);font-weight:800;border-radius:12px;padding:12px 28px;font-family:'Syne',sans-serif;}
-    .progress-fill{background:linear-gradient(90deg,var(--brand),var(--brand-light));border-radius:99px;transition:width .4s;}
+    @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+    .stepper-dot{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;}
+    .progress-bar{height:8px;border-radius:99px;background:#e5e7eb;overflow:hidden;}
+    .progress-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--brand),var(--brand-light));transition:width 0.5s ease;}
+    .video-card{background:#fff;border:1.5px solid #ede9fe;border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;transition:all 0.2s;cursor:pointer;text-decoration:none;margin-bottom:10px;}
+    .video-card:hover{border-color:var(--brand);box-shadow:0 4px 20px rgba(99,54,199,0.12);transform:translateY(-2px);}
+    .quiz-opt{border:2px solid #e5e7eb;background:#fff;border-radius:12px;padding:12px 16px;cursor:pointer;transition:all 0.2s;font-weight:500;font-size:14px;text-align:left;width:100%;font-family:'DM Sans',sans-serif;}
+    .quiz-opt:hover:not(:disabled){border-color:var(--brand);background:#faf8ff;}
+    .quiz-opt.selected{border-color:var(--brand);background:linear-gradient(135deg,#ede9fe,#f5f3ff);color:#6336c7;font-weight:700;}
+    .quiz-opt.correct{border-color:#16a34a !important;background:linear-gradient(135deg,#f0fdf4,#dcfce7) !important;color:#16a34a;font-weight:700;}
+    .quiz-opt.wrong{border-color:#ef4444 !important;background:linear-gradient(135deg,#fef2f2,#fee2e2) !important;color:#ef4444;font-weight:700;}
+    .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-light));color:#fff;font-weight:700;border-radius:14px;padding:12px 28px;cursor:pointer;transition:all 0.2s;font-family:'Syne',sans-serif;border:none;box-shadow:0 4px 20px var(--brand-glow);font-size:14px;}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px var(--brand-glow);}
+    .btn-primary:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
+    .btn-secondary{background:#fff;color:#1a1033;font-weight:600;border-radius:14px;padding:12px 28px;cursor:pointer;border:2px solid #e5e7eb;transition:all 0.2s;font-family:'Syne',sans-serif;font-size:14px;}
+    .btn-secondary:hover{border-color:var(--brand);background:#faf8ff;}
+    .section-block{background:#fff;border:1.5px solid #ede9fe;border-radius:20px;padding:24px;margin-bottom:24px;box-shadow:0 4px 24px rgba(99,54,199,0.06);animation:fadeIn 0.4s ease;}
+    .admin-input{width:100%;padding:10px 14px;border:1.5px solid #e5e7eb;border-radius:10px;font-size:14px;outline:none;transition:border-color 0.2s;font-family:'DM Sans',sans-serif;}
+    .admin-input:focus{border-color:var(--brand);}
+    .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);z-index:1000;overflow-y:auto;padding:24px 16px;}
   </style>
 </head>
 <body>
@@ -30,102 +43,565 @@
 <script type="text/babel">
 const {useState,useEffect} = React;
 
-const FIELD_LABEL = {
-  programming: { en:"Programming Roadmap", icon:"💻" },
-  networking: { en:"Networking Roadmap", icon:"🌐" },
-  communications: { en:"Communications Roadmap", icon:"📡" },
+const DEFAULT_DATA = {
+  programming:{
+    title:"Programming Roadmap",icon:"💻",color:"#6336c7",
+    sections:[
+      {id:"ps1",title:"Foundations of Programming",
+        videos:[
+          {id:"pv1",title:"Python Full Course for Beginners",url:"https://www.youtube.com/watch?v=_uQrJ0TkZlc"},
+          {id:"pv2",title:"Data Structures & Algorithms Explained",url:"https://www.youtube.com/watch?v=8hly31xKli0"},
+          {id:"pv3",title:"Object Oriented Programming – Full Course",url:"https://www.youtube.com/watch?v=Ej_02ICOIgs"}
+        ],
+        quiz:[
+          {id:"pq1",question:"What does OOP stand for?",options:["Object Oriented Programming","Open Object Protocol","Output Operation Process","Ordered Object Paradigm"],correct:0},
+          {id:"pq2",question:"Which data structure follows LIFO principle?",options:["Queue","Stack","Array","Linked List"],correct:1},
+          {id:"pq3",question:"What is the time complexity of binary search?",options:["O(n)","O(n²)","O(log n)","O(1)"],correct:2}
+        ]
+      },
+      {id:"ps2",title:"Web Development",
+        videos:[
+          {id:"pv4",title:"HTML & CSS Full Course – Beginner to Pro",url:"https://www.youtube.com/watch?v=mU6anWqZJcc"},
+          {id:"pv5",title:"JavaScript Full Course for Beginners",url:"https://www.youtube.com/watch?v=PkZNo7MFNFg"},
+          {id:"pv6",title:"React JS Full Course 2024",url:"https://www.youtube.com/watch?v=x4rFhThSX04"}
+        ],
+        quiz:[
+          {id:"pq4",question:"What does HTML stand for?",options:["HyperText Markup Language","High Transfer Markup Language","Hyperlink Text Management Language","HyperText Module Language"],correct:0},
+          {id:"pq5",question:"Which React hook is used for side effects?",options:["useState","useContext","useEffect","useReducer"],correct:2},
+          {id:"pq6",question:"What is CSS Flexbox used for?",options:["Database queries","Layout design","Server routing","Security"],correct:1}
+        ]
+      },
+      {id:"ps3",title:"Backend & Databases",
+        videos:[
+          {id:"pv7",title:"Node.js and Express Full Course",url:"https://www.youtube.com/watch?v=Oe421EPjeBE"},
+          {id:"pv8",title:"SQL Full Course – Learn SQL in 4 Hours",url:"https://www.youtube.com/watch?v=HXV3zeQKqGY"},
+          {id:"pv9",title:"REST API Design – Best Practices",url:"https://www.youtube.com/watch?v=7YcW25PHnAA"}
+        ],
+        quiz:[
+          {id:"pq7",question:"What does REST stand for?",options:["Real Event Server Transfer","Representational State Transfer","Remote Execution Standard Transfer","Rapid Event Streaming Technology"],correct:1},
+          {id:"pq8",question:"Which SQL command retrieves data?",options:["INSERT","DELETE","UPDATE","SELECT"],correct:3},
+          {id:"pq9",question:"What is middleware in Express.js?",options:["A database","A function between request and response","A frontend library","A testing tool"],correct:1}
+        ]
+      }
+    ]
+  },
+  networking:{
+    title:"Networking Roadmap",icon:"🌐",color:"#16a34a",
+    sections:[
+      {id:"ns1",title:"Network Fundamentals",
+        videos:[
+          {id:"nv1",title:"Computer Networking Full Course – OSI Model",url:"https://www.youtube.com/watch?v=IPvYjXCsTg8"},
+          {id:"nv2",title:"IP Addressing and Subnetting – Explained",url:"https://www.youtube.com/watch?v=EkNq4TrHP_U"},
+          {id:"nv3",title:"TCP vs UDP – Explained with Examples",url:"https://www.youtube.com/watch?v=uwoD5YsGACg"}
+        ],
+        quiz:[
+          {id:"nq1",question:"How many layers does the OSI model have?",options:["5","6","7","8"],correct:2},
+          {id:"nq2",question:"What does IP stand for?",options:["Internal Protocol","Internet Protocol","Interface Program","Input Process"],correct:1},
+          {id:"nq3",question:"Which OSI layer handles routing?",options:["Physical","Data Link","Network","Transport"],correct:2}
+        ]
+      },
+      {id:"ns2",title:"Switching & Routing",
+        videos:[
+          {id:"nv4",title:"Cisco CCNA – Routing & Switching Full Course",url:"https://www.youtube.com/watch?v=rv3QK2UquxM"},
+          {id:"nv5",title:"VLANs Explained – Network Segmentation",url:"https://www.youtube.com/watch?v=MmwF1oHOvmg"},
+          {id:"nv6",title:"OSPF Routing Protocol Explained",url:"https://www.youtube.com/watch?v=kfvJ8QVJscc"}
+        ],
+        quiz:[
+          {id:"nq4",question:"What does VLAN stand for?",options:["Virtual LAN","Variable Length Address Network","Verified Local Area Node","Virtual Link Access Node"],correct:0},
+          {id:"nq5",question:"Which device operates at Layer 3?",options:["Hub","Switch","Router","Repeater"],correct:2},
+          {id:"nq6",question:"What protocol assigns IP addresses automatically?",options:["DNS","DHCP","FTP","SSH"],correct:1}
+        ]
+      },
+      {id:"ns3",title:"Network Security",
+        videos:[
+          {id:"nv7",title:"Network Security Full Course",url:"https://www.youtube.com/watch?v=v4CN4L5UAXI"},
+          {id:"nv8",title:"Firewalls Explained – How They Work",url:"https://www.youtube.com/watch?v=eO6QKDL3p1I"},
+          {id:"nv9",title:"VPN – How it Works & Why You Need It",url:"https://www.youtube.com/watch?v=R-JUOpCgTZc"}
+        ],
+        quiz:[
+          {id:"nq7",question:"What does VPN stand for?",options:["Virtual Private Network","Verified Public Node","Variable Protocol Network","Virtual Packet Node"],correct:0},
+          {id:"nq8",question:"What is a firewall's primary function?",options:["Speed up internet","Filter network traffic","Store data","Manage IP addresses"],correct:1},
+          {id:"nq9",question:"Which port does HTTPS use?",options:["80","21","443","22"],correct:2}
+        ]
+      }
+    ]
+  },
+  communications:{
+    title:"Communications Roadmap",icon:"📡",color:"#ea580c",
+    sections:[
+      {id:"cs1",title:"Signals & Systems",
+        videos:[
+          {id:"cv1",title:"Signals and Systems – Full Course",url:"https://www.youtube.com/watch?v=s8rsR_TStaA"},
+          {id:"cv2",title:"Fourier Transform – Explained Visually",url:"https://www.youtube.com/watch?v=spUNpyF58BY"},
+          {id:"cv3",title:"Analog vs Digital Signals – Complete Guide",url:"https://www.youtube.com/watch?v=btQQhN4D_Bk"}
+        ],
+        quiz:[
+          {id:"cq1",question:"What does AM stand for in broadcasting?",options:["Amplitude Modulation","Automatic Management","Audio Mixing","Analog Module"],correct:0},
+          {id:"cq2",question:"What is the Nyquist theorem about?",options:["Antenna design","Sampling rate for signals","Network speed","Fiber optic cables"],correct:1},
+          {id:"cq3",question:"Which wave travels at the speed of light?",options:["Sound wave","Mechanical wave","Electromagnetic wave","Seismic wave"],correct:2}
+        ]
+      },
+      {id:"cs2",title:"Wireless & RF",
+        videos:[
+          {id:"cv4",title:"Wireless Communication Systems – Full Course",url:"https://www.youtube.com/watch?v=1JZG9x_VOwA"},
+          {id:"cv5",title:"RF Engineering Basics – Explained",url:"https://www.youtube.com/watch?v=OXLsHEyBjUs"},
+          {id:"cv6",title:"5G Networks – How It Works",url:"https://www.youtube.com/watch?v=GEx_d0SjvS0"}
+        ],
+        quiz:[
+          {id:"cq4",question:"What does RF stand for?",options:["Radio Frequency","Rapid Flow","Remote Function","Recursive Filter"],correct:0},
+          {id:"cq5",question:"Which generation introduced LTE?",options:["2G","3G","4G","5G"],correct:2},
+          {id:"cq6",question:"What is MIMO technology?",options:["Multiple Input Multiple Output","Modular Integrated Mobile Operation","Minimum Input Maximum Output","Modulated Intelligent Mobile Overlay"],correct:0}
+        ]
+      },
+      {id:"cs3",title:"Satellite & Fiber Optics",
+        videos:[
+          {id:"cv7",title:"Satellite Communication – Full Lecture",url:"https://www.youtube.com/watch?v=uVzm1GBDCLY"},
+          {id:"cv8",title:"Fiber Optic Cable – How It Works",url:"https://www.youtube.com/watch?v=0MwMkBET_5I"},
+          {id:"cv9",title:"6G Technology – The Future of Communications",url:"https://www.youtube.com/watch?v=gLnNFuBJiCE"}
+        ],
+        quiz:[
+          {id:"cq7",question:"Main advantage of fiber optic over copper cable?",options:["Cheaper cost","Higher bandwidth & speed","Easier installation","Wireless capability"],correct:1},
+          {id:"cq8",question:"GEO satellites orbit at approximately:",options:["500 km","2,000 km","20,200 km","35,786 km"],correct:3},
+          {id:"cq9",question:"What does LEO stand for?",options:["Low Energy Output","Light Emission Optics","Low Earth Orbit","Large Electromagnetic Object"],correct:2}
+        ]
+      }
+    ]
+  }
 };
 
-function Header(){
-  return (
-    <header style={{ background:'#fff', borderBottom:'1px solid #f0eefe', position:'sticky', top:0, zIndex:50 }}>
-      <div style={{ maxWidth:900, margin:'0 auto', padding:'16px 24px', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
-        <a href="index.html" className="syne" style={{ fontSize:22, fontWeight:800, color:'var(--brand)' }}>Careery</a>
-        <a href="profile.html" title="Profile" style={{ width:36, height:36, borderRadius:'50%', background:'linear-gradient(135deg,#6336c7,#8b5cf6)', display:'flex', alignItems:'center', justifyContent:'center', color:'#fff', fontWeight:700, fontSize:12 }}>{getInitials()}</a>
-      </div>
-    </header>
-  );
-}
+function lsGet(k,fb=null){try{const v=localStorage.getItem(k);return v!==null?JSON.parse(v):fb;}catch{return fb;}}
+function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch{}}
 
-function RoadmapPage(){
-  const [data,setData]=useState(null);
-  const [loading,setLoading]=useState(true);
-  const [error,setError]=useState("");
-
-  const load=async()=>{
-    const res = await apiFetch("/roadmap");
-    if(!res) return;
-    if(res.status===404){
-      window.location.href = "quiz.html";
-      return;
-    }
-    const json = await res.json();
-    setData(json);
-    setLoading(false);
-  };
-
-  useEffect(()=>{
-    if(!requireAuth()) return;
-    load();
-  },[]);
-
-  const toggle=async(stepId, currentlyDone)=>{
-    // optimistic UI update
-    setData(prev=>{
-      const steps = prev.steps.map(s=> s.id===stepId ? {...s, completed:!currentlyDone} : s);
-      const done = steps.filter(s=>s.completed).length;
-      return {...prev, steps, progress:{...prev.progress, completed:done, percentage: Math.round((done/steps.length)*100)}};
-    });
-    await apiFetch("/roadmap/progress",{ method:"POST", body: JSON.stringify({ stepId, completed: !currentlyDone }) });
-  };
-
-  if(loading) return <div style={{ padding:60, textAlign:'center', color:'#9ca3af' }}>Loading...</div>;
-  if(!data) return null;
-
-  const field = FIELD_LABEL[data.field] || {en:"Roadmap", icon:"🗺️"};
-
-  return (
-    <div>
-      <Header/>
-      <main style={{ maxWidth:900, margin:'0 auto', padding:'32px 24px 64px' }}>
-
-        {/* Prominent Explore link */}
-        <div className="explore-banner">
-          <div>
-            <div className="syne" style={{ fontSize:20, fontWeight:800, marginBottom:4 }}>Want to go deeper? 🚀</div>
-            <div style={{ fontSize:14, opacity:0.9 }}>Explore top experts, podcasts & books for your field</div>
-          </div>
-          <a href="explore.html" className="btn-white">Go to Explore →</a>
-        </div>
-
-        <div style={{ textAlign:'center', marginBottom:32 }}>
-          <div style={{ fontSize:40, marginBottom:8 }}>{field.icon}</div>
-          <h1 className="syne" style={{ fontSize:'clamp(26px,4vw,38px)', fontWeight:800 }}>{field.en}</h1>
-          <p style={{ color:'#6b7280', marginTop:8 }}>
-            {data.progress.completed} of {data.progress.total} steps completed ({data.progress.percentage}%)
-          </p>
-          <div style={{ height:10, background:'#f3f4f6', borderRadius:99, marginTop:12, maxWidth:400, marginLeft:'auto', marginRight:'auto', overflow:'hidden' }}>
-            <div className="progress-fill" style={{ width:`${data.progress.percentage}%`, height:'100%' }} />
-          </div>
-        </div>
-
-        {data.steps.map((s,i)=>(
-          <div key={s.id} className={`card ${s.completed?"done":""}`}>
-            <div className={`checkbox ${s.completed?"done":""}`} onClick={()=>toggle(s.id,s.completed)}>
-              {s.completed ? "✓" : ""}
-            </div>
-            <div>
-              <div style={{ fontSize:12, fontWeight:700, color:'var(--brand)', marginBottom:2 }}>STEP {i+1}</div>
-              <div style={{ fontWeight:700 }}>{s.title.en}</div>
-            </div>
+function Stepper(){
+  const steps=[{l:"Explore",i:"🔍"},{l:"Quiz",i:"📋"},{l:"Roadmap",i:"🗺️"}];
+  return(
+    <div style={{position:"relative",marginBottom:0,maxWidth:600,margin:"0 auto"}}>
+      <div style={{position:"absolute",top:20,left:"10%",right:"10%",height:2,background:"#e5e7eb",zIndex:0}}/>
+      <div style={{display:"flex",justifyContent:"space-between",position:"relative",zIndex:1}}>
+        {steps.map((s,i)=>(
+          <div key={i} style={{display:"flex",flexDirection:"column",alignItems:"center",gap:8,width:100}}>
+            <div className="stepper-dot" style={{
+              background:i===2?"linear-gradient(135deg,#6336c7,#8b5cf6)":"#fff",
+              border:`2px solid ${i===2?"#6336c7":"#e5e7eb"}`,
+              color:i===2?"#fff":"#9ca3af",
+              boxShadow:i===2?"0 4px 16px rgba(99,54,199,0.3)":"none"
+            }}>{s.i}</div>
+            <span style={{fontSize:9,fontWeight:700,textTransform:"uppercase",letterSpacing:"0.08em",color:i===2?"#6336c7":"#9ca3af",textAlign:"center"}}>
+              Step {i+1}: {s.l}
+            </span>
           </div>
         ))}
-      </main>
+      </div>
     </div>
   );
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(<RoadmapPage/>);
+function VideoCard({video,index,watched,onWatch}){
+  return(
+    <a href={video.url} target="_blank" rel="noopener noreferrer"
+      className="video-card"
+      onClick={()=>onWatch(video.id)}
+      style={{border:watched?"2px solid #6336c7":"1.5px solid #ede9fe",
+        background:watched?"linear-gradient(135deg,#f5f3ff,#ede9fe)":"#fff"}}
+    >
+      <div style={{width:52,height:52,borderRadius:10,background:"linear-gradient(135deg,#ef4444,#dc2626)",
+        display:"flex",alignItems:"center",justifyContent:"center",fontSize:22,flexShrink:0}}>
+        ▶️
+      </div>
+      <div style={{flex:1,minWidth:0}}>
+        <div style={{fontSize:10,fontWeight:700,color:"#9ca3af",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:3}}>
+          Video {index+1}
+        </div>
+        <div className="syne" style={{fontSize:14,fontWeight:700,color:"#1a1033",lineHeight:1.4,
+          overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>
+          {video.title}
+        </div>
+        <div style={{fontSize:11,color:"#6336c7",marginTop:3,fontWeight:600}}>
+          {watched ? "✅ Watched" : "▶ Watch on YouTube →"}
+        </div>
+      </div>
+      {watched && <div style={{fontSize:20,flexShrink:0}}>✅</div>}
+    </a>
+  );
+}
+
+function SectionQuiz({questions,onComplete,savedResult}){
+  const [answers,setAnswers]=useState(savedResult?savedResult.answers:{});
+  const [submitted,setSubmitted]=useState(!!savedResult);
+  const [score,setScore]=useState(savedResult?{correct:savedResult.correct,total:savedResult.total}:null);
+
+  function pick(qid,idx){if(submitted)return;setAnswers(prev=>({...prev,[qid]:idx}));}
+
+  function submit(){
+    let correct=0;
+    questions.forEach(q=>{if(answers[q.id]===q.correct)correct++;});
+    const sc={correct,total:questions.length,answers};
+    setScore(sc);setSubmitted(true);onComplete(sc);
+  }
+
+  const allAnswered=questions.every(q=>answers[q.id]!==undefined);
+
+  return(
+    <div style={{background:"linear-gradient(135deg,#fff7ed,#ffedd5)",border:"2px solid #fed7aa",borderRadius:18,padding:22,marginTop:16}}>
+      <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:18}}>
+        <div style={{width:36,height:36,borderRadius:10,background:"#f59e0b",display:"flex",alignItems:"center",
+          justifyContent:"center",fontSize:18,fontWeight:900,color:"#fff",flexShrink:0}}>Q</div>
+        <div style={{flex:1}}>
+          <div className="syne" style={{fontSize:15,fontWeight:800,color:"#1a1033"}}>Section Quiz</div>
+          <div style={{fontSize:12,color:"#9ca3af"}}>{questions.length} questions · Test your knowledge</div>
+        </div>
+        {submitted&&score&&(
+          <div style={{background:score.correct===score.total?"#16a34a":score.correct>=score.total/2?"#f59e0b":"#ef4444",
+            color:"#fff",borderRadius:10,padding:"6px 14px",fontWeight:800,fontSize:14,flexShrink:0}}>
+            {score.correct}/{score.total} ✓
+          </div>
+        )}
+      </div>
+
+      {questions.map((q,qi)=>(
+        <div key={q.id} style={{marginBottom:18}}>
+          <div style={{fontSize:14,fontWeight:700,color:"#1a1033",marginBottom:10,lineHeight:1.5}}>
+            <span style={{color:"#f59e0b",fontWeight:800}}>{qi+1}. </span>{q.question}
+          </div>
+          <div style={{display:"flex",flexDirection:"column",gap:7}}>
+            {q.options.map((opt,oi)=>{
+              let cls="quiz-opt";
+              if(submitted){
+                if(oi===q.correct) cls+=" correct";
+                else if(answers[q.id]===oi&&oi!==q.correct) cls+=" wrong";
+              } else if(answers[q.id]===oi) cls+=" selected";
+              return(
+                <button key={oi} className={cls} onClick={()=>pick(q.id,oi)} disabled={submitted}>
+                  <span style={{fontWeight:700,marginRight:8}}>{["A","B","C","D"][oi]}.</span>{opt}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+
+      {!submitted?(
+        <button className="btn-primary" onClick={submit} disabled={!allAnswered} style={{marginTop:8,width:"100%"}}>
+          Submit Quiz →
+        </button>
+      ):(
+        <div style={{background:score.correct===score.total?"#f0fdf4":score.correct>=score.total/2?"#fffbeb":"#fef2f2",
+          border:`1.5px solid ${score.correct===score.total?"#86efac":score.correct>=score.total/2?"#fde68a":"#fca5a5"}`,
+          borderRadius:12,padding:14,textAlign:"center",marginTop:8}}>
+          <div style={{fontSize:22,marginBottom:4}}>
+            {score.correct===score.total?"🎉":score.correct>=score.total/2?"👍":"💪"}
+          </div>
+          <div className="syne" style={{fontWeight:800,fontSize:16,color:"#1a1033"}}>
+            {score.correct===score.total?"Perfect Score!":score.correct>=score.total/2?"Good Job!":"Keep Practicing!"}
+          </div>
+          <div style={{fontSize:13,color:"#6b7280",marginTop:4}}>
+            {score.correct} out of {score.total} correct
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function SectionBlock({section,sectionIndex,progress,onProgressUpdate}){
+  const watched=progress.watched||{};
+  const quizResult=progress.quizResult||null;
+  const watchedCount=section.videos.filter(v=>watched[v.id]).length;
+  const allWatched=watchedCount===section.videos.length;
+  const isDone=allWatched&&quizResult;
+
+  function handleWatch(vid){
+    const nw={...watched,[vid]:true};
+    onProgressUpdate(sectionIndex,{...progress,watched:nw});
+  }
+  function handleQuizComplete(sc){
+    onProgressUpdate(sectionIndex,{...progress,quizResult:sc});
+  }
+
+  return(
+    <div className="section-block">
+      <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:16}}>
+        <div style={{width:44,height:44,borderRadius:12,
+          background:isDone?"linear-gradient(135deg,#16a34a,#22c55e)":"linear-gradient(135deg,#6336c7,#8b5cf6)",
+          display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontWeight:800,fontSize:16,flexShrink:0}}>
+          {isDone?"✓":sectionIndex+1}
+        </div>
+        <div style={{flex:1}}>
+          <div className="syne" style={{fontSize:17,fontWeight:800,color:"#1a1033"}}>{section.title}</div>
+          <div style={{fontSize:12,color:"#9ca3af",marginTop:2}}>{watchedCount}/{section.videos.length} videos watched</div>
+        </div>
+        {isDone&&(
+          <div style={{fontSize:11,fontWeight:700,color:"#16a34a",background:"#f0fdf4",
+            border:"1.5px solid #86efac",borderRadius:99,padding:"4px 12px",flexShrink:0}}>
+            ✅ Complete
+          </div>
+        )}
+      </div>
+
+      <div>
+        {section.videos.map((v,i)=>(
+          <VideoCard key={v.id} video={v} index={i} watched={!!watched[v.id]} onWatch={handleWatch}/>
+        ))}
+      </div>
+
+      {allWatched?(
+        <SectionQuiz questions={section.quiz} onComplete={handleQuizComplete} savedResult={quizResult}/>
+      ):(
+        <div style={{background:"#f8f7ff",border:"1.5px dashed #c4b5fd",borderRadius:14,padding:"14px 18px",
+          display:"flex",alignItems:"center",gap:12,marginTop:4}}>
+          <span style={{fontSize:20}}>🔒</span>
+          <div style={{flex:1}}>
+            <div style={{fontWeight:700,fontSize:14,color:"#6b7280"}}>Section Quiz</div>
+            <div style={{fontSize:12,color:"#9ca3af"}}>Watch all {section.videos.length} videos to unlock the quiz</div>
+          </div>
+          <div style={{background:"#ede9fe",borderRadius:99,padding:"4px 12px",fontSize:12,fontWeight:700,color:"#6336c7",flexShrink:0}}>
+            {watchedCount}/{section.videos.length}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function AdminPanel({data,onSave,onClose}){
+  const [local,setLocal]=useState(JSON.parse(JSON.stringify(data)));
+  function upVideo(si,vi,f,v){const d=JSON.parse(JSON.stringify(local));d.sections[si].videos[vi][f]=v;setLocal(d);}
+  function upQ(si,qi,f,v){const d=JSON.parse(JSON.stringify(local));d.sections[si].quiz[qi][f]=v;setLocal(d);}
+  function upOpt(si,qi,oi,v){const d=JSON.parse(JSON.stringify(local));d.sections[si].quiz[qi].options[oi]=v;setLocal(d);}
+  function upCorrect(si,qi,v){const d=JSON.parse(JSON.stringify(local));d.sections[si].quiz[qi].correct=parseInt(v);setLocal(d);}
+  return(
+    <div className="modal-overlay">
+      <div style={{maxWidth:720,margin:"0 auto",background:"#fff",borderRadius:24,padding:28}}>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:24}}>
+          <h2 className="syne" style={{fontSize:22,fontWeight:800,color:"#1a1033"}}>✏️ Edit Roadmap Content</h2>
+          <button onClick={onClose} style={{background:"#f3f4f6",border:"none",borderRadius:10,padding:"8px 16px",cursor:"pointer",fontWeight:700,fontSize:14}}>✕ Close</button>
+        </div>
+        {local.sections.map((sec,si)=>(
+          <div key={sec.id} style={{marginBottom:28,border:"1.5px solid #ede9fe",borderRadius:16,padding:18}}>
+            <div className="syne" style={{fontSize:16,fontWeight:800,color:"#6336c7",marginBottom:14}}>
+              📚 Section {si+1}: {sec.title}
+            </div>
+            <div style={{marginBottom:16}}>
+              <div style={{fontSize:11,fontWeight:700,color:"#9ca3af",textTransform:"uppercase",marginBottom:8,letterSpacing:"0.06em"}}>🎬 Videos</div>
+              {sec.videos.map((v,vi)=>(
+                <div key={v.id} style={{marginBottom:10,padding:"14px",background:"#f8f7ff",borderRadius:12}}>
+                  <div style={{fontSize:11,color:"#9ca3af",fontWeight:700,marginBottom:8}}>Video {vi+1}</div>
+                  <input className="admin-input" style={{marginBottom:8}} placeholder="Video Title"
+                    value={v.title} onChange={e=>upVideo(si,vi,"title",e.target.value)}/>
+                  <input className="admin-input" placeholder="YouTube URL (https://youtube.com/watch?v=...)"
+                    value={v.url} onChange={e=>upVideo(si,vi,"url",e.target.value)}/>
+                </div>
+              ))}
+            </div>
+            <div>
+              <div style={{fontSize:11,fontWeight:700,color:"#9ca3af",textTransform:"uppercase",marginBottom:8,letterSpacing:"0.06em"}}>❓ Quiz Questions</div>
+              {sec.quiz.map((q,qi)=>(
+                <div key={q.id} style={{marginBottom:14,padding:"14px",background:"#fffbeb",border:"1.5px solid #fde68a",borderRadius:12}}>
+                  <div style={{fontSize:11,color:"#f59e0b",fontWeight:700,marginBottom:8}}>Question {qi+1}</div>
+                  <input className="admin-input" style={{marginBottom:10}} placeholder="Question text"
+                    value={q.question} onChange={e=>upQ(si,qi,"question",e.target.value)}/>
+                  {q.options.map((opt,oi)=>(
+                    <div key={oi} style={{display:"flex",alignItems:"center",gap:8,marginBottom:7}}>
+                      <div onClick={()=>upCorrect(si,qi,oi)} title="Click to mark as correct answer"
+                        style={{width:30,height:30,borderRadius:8,flexShrink:0,cursor:"pointer",
+                          background:oi===q.correct?"#16a34a":"#e5e7eb",
+                          color:oi===q.correct?"#fff":"#6b7280",
+                          display:"flex",alignItems:"center",justifyContent:"center",
+                          fontSize:12,fontWeight:700,border:oi===q.correct?"2px solid #15803d":"2px solid transparent",
+                          transition:"all 0.2s"}}>
+                        {["A","B","C","D"][oi]}
+                      </div>
+                      <input className="admin-input"
+                        style={{border:oi===q.correct?"1.5px solid #86efac":"1.5px solid #e5e7eb"}}
+                        placeholder={`Option ${["A","B","C","D"][oi]}`}
+                        value={opt} onChange={e=>upOpt(si,qi,oi,e.target.value)}/>
+                    </div>
+                  ))}
+                  <div style={{fontSize:11,color:"#6b7280",marginTop:6}}>
+                    💡 Click letter badge to set correct answer. Current: <strong style={{color:"#16a34a"}}>{["A","B","C","D"][q.correct]}</strong>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+        <div style={{display:"flex",gap:12}}>
+          <button className="btn-secondary" onClick={onClose} style={{flex:1}}>Cancel</button>
+          <button className="btn-primary" onClick={()=>onSave(local)} style={{flex:2}}>💾 Save Changes</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function getSpec(){
+  try{
+    const p=new URLSearchParams(window.location.search).get("spec");
+    if(p&&["programming","networking","communications"].includes(p)){
+      try{localStorage.setItem("careery_specialization",p);}catch(e){}
+      return p;
+    }
+  }catch(e){}
+  return lsGet("careery_specialization",null);
+}
+
+function App(){
+  const [spec]=useState(()=>getSpec());
+  const [data,setData]=useState(()=>{
+    const s=getSpec();
+    if(!s)return null;
+    const custom=lsGet("careery_roadmap_data_"+s,null);
+    return custom||JSON.parse(JSON.stringify(DEFAULT_DATA[s]||DEFAULT_DATA.programming));
+  });
+  const [progress,setProgress]=useState(()=>{
+    const s=getSpec();
+    if(!s)return {};
+    return lsGet("careery_roadmap_progress_"+s,{});
+  });
+  const [showAdmin,setShowAdmin]=useState(false);
+  const [toast,setToast]=useState(null);
+
+  function handleProgressUpdate(si,sp){
+    const np={...progress,[si]:sp};
+    setProgress(np);
+    if(spec)lsSet("careery_roadmap_progress_"+spec,np);
+  }
+  function handleAdminSave(nd){
+    setData(nd);
+    if(spec)lsSet("careery_roadmap_data_"+spec,nd);
+    setShowAdmin(false);
+    flash("✅ Changes saved successfully!");
+  }
+  function flash(msg){setToast(msg);setTimeout(()=>setToast(null),3000);}
+  function resetProgress(){
+    if(!window.confirm("Reset all progress for this roadmap?"))return;
+    setProgress({});if(spec)lsSet("careery_roadmap_progress_"+spec,{});flash("🔄 Progress reset!");
+  }
+
+  if(!spec)return(
+    <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",background:"#f8f7ff",padding:24}}>
+      <div style={{textAlign:"center",maxWidth:400}}>
+        <div style={{fontSize:52,marginBottom:16}}>📋</div>
+        <div className="syne" style={{fontSize:22,fontWeight:800,color:"#1a1033",marginBottom:10}}>Take the Quiz First</div>
+        <p style={{color:"#6b7280",fontSize:15,lineHeight:1.7,marginBottom:28}}>
+          Your roadmap is personalised based on your quiz result. Please complete the career quiz to unlock your roadmap.
+        </p>
+        <a href="quiz.html" style={{background:"linear-gradient(135deg,#6336c7,#8b5cf6)",color:"#fff",
+          fontWeight:700,borderRadius:14,padding:"14px 36px",fontSize:15,display:"inline-block",
+          boxShadow:"0 6px 24px rgba(99,54,199,0.3)",fontFamily:"Syne,sans-serif"}}>
+          Start Career Quiz →
+        </a>
+      </div>
+    </div>
+  );
+
+  if(!data)return(
+    <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",background:"#f8f7ff"}}>
+      <div style={{textAlign:"center"}}>
+        <div style={{fontSize:40,marginBottom:12}}>⏳</div>
+        <div className="syne" style={{fontSize:18,fontWeight:700,color:"#6336c7"}}>Loading your roadmap...</div>
+      </div>
+    </div>
+  );
+
+  const total=data.sections.length;
+  const done=data.sections.filter((_,i)=>{
+    const sp=progress[i]||{};
+    const w=sp.watched||{};
+    return data.sections[i].videos.every(v=>w[v.id])&&sp.quizResult;
+  }).length;
+  const pct=Math.round((done/total)*100);
+
+  const SM={
+    programming:{color:"#6336c7",label:"Programming",icon:"💻"},
+    networking:{color:"#16a34a",label:"Networking",icon:"🌐"},
+    communications:{color:"#ea580c",label:"Communications",icon:"📡"}
+  };
+  const sm=SM[spec]||SM.programming;
+
+  return(
+    <div style={{minHeight:"100vh",display:"flex",flexDirection:"column"}}>
+      {toast&&(
+        <div style={{position:"fixed",top:80,left:"50%",transform:"translateX(-50%)",
+          background:"#1a1033",color:"#fff",borderRadius:12,padding:"12px 24px",
+          fontWeight:700,fontSize:14,zIndex:9999,boxShadow:"0 8px 32px rgba(0,0,0,0.3)",
+          animation:"fadeIn 0.3s ease",whiteSpace:"nowrap"}}>
+          {toast}
+        </div>
+      )}
+
+      {showAdmin&&<AdminPanel data={data} onSave={handleAdminSave} onClose={()=>setShowAdmin(false)}/>}
+
+      <header style={{background:"#fff",borderBottom:"1px solid #f0eefe",position:"sticky",top:0,zIndex:50}}>
+        <div style={{maxWidth:1100,margin:"0 auto",padding:"16px 24px",display:"flex",justifyContent:"space-between",alignItems:"center",gap:12}}>
+          <span className="syne" style={{fontSize:22,fontWeight:800,color:"var(--brand)"}}>Careery</span>
+          <div style={{display:"flex",alignItems:"center",gap:10}}>
+            <div style={{width:38,height:38,borderRadius:"50%",background:"linear-gradient(135deg,#6336c7,#8b5cf6)",
+              display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontWeight:700,fontSize:13}}>MZ</div>
+          </div>
+        </div>
+      </header>
+
+      <main style={{maxWidth:800,margin:"0 auto",padding:"40px 24px 80px",width:"100%"}}>
+        <div style={{marginBottom:40}}><Stepper/></div>
+
+        <div style={{textAlign:"center",marginBottom:32}}>
+          <div style={{display:"inline-flex",alignItems:"center",gap:10,background:"#fff",
+            border:"2px solid "+sm.color+"33",borderRadius:99,padding:"8px 20px",marginBottom:16,
+            boxShadow:"0 4px 16px rgba(99,54,199,0.08)"}}>
+            <span style={{fontSize:18}}>{sm.icon}</span>
+            <span style={{fontWeight:800,fontSize:13,color:sm.color,textTransform:"uppercase",letterSpacing:"0.06em"}}>
+              {sm.label} Track
+            </span>
+          </div>
+          <h1 className="syne" style={{fontSize:"clamp(28px,5vw,44px)",fontWeight:800,marginBottom:10}}>
+            {data.title}
+          </h1>
+          <p style={{color:"#6b7280",fontSize:15,maxWidth:480,margin:"0 auto"}}>
+            Watch all videos in each section, then pass the quiz to unlock the next level.
+          </p>
+        </div>
+
+        <div style={{background:"#fff",border:"1.5px solid #ede9fe",borderRadius:16,padding:"18px 22px",
+          marginBottom:32,boxShadow:"0 4px 20px rgba(99,54,199,0.06)"}}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
+            <span style={{fontSize:11,fontWeight:700,color:"#9ca3af",textTransform:"uppercase",letterSpacing:"0.06em"}}>Overall Progress</span>
+            <span className="syne" style={{fontSize:16,fontWeight:800,color:"var(--brand)"}}>{pct}%</span>
+          </div>
+          <div className="progress-bar">
+            <div className="progress-fill" style={{width:pct+"%"}}/>
+          </div>
+          <p style={{fontSize:12,color:"#9ca3af",marginTop:8}}>{done} of {total} sections complete</p>
+        </div>
+
+        {data.sections.map((sec,si)=>(
+          <SectionBlock key={sec.id} section={sec} sectionIndex={si}
+            progress={progress[si]||{}} onProgressUpdate={handleProgressUpdate}/>
+        ))}
+
+        {pct===100&&(
+          <div style={{background:"linear-gradient(135deg,#6336c7,#8b5cf6)",borderRadius:20,padding:"32px 24px",
+            textAlign:"center",color:"#fff",boxShadow:"0 8px 40px rgba(99,54,199,0.35)",animation:"fadeIn 0.5s ease"}}>
+            <div style={{fontSize:52,marginBottom:12}}>🏆</div>
+            <div className="syne" style={{fontSize:24,fontWeight:800,marginBottom:8}}>Roadmap Complete!</div>
+            <div style={{opacity:0.85,fontSize:15}}>
+              You have completed all sections of the {sm.label} roadmap. Well done!
+            </div>
+          </div>
+        )}
+      </main>
+
+      <footer style={{background:"#fff",borderTop:"1px solid #f0eefe",padding:"24px"}}>
+        <div style={{maxWidth:1100,margin:"0 auto",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:12}}>
+          <span className="syne" style={{fontSize:16,fontWeight:800}}>Careery</span>
+          <span style={{fontSize:13,color:"#9ca3af"}}>© 2026 Careery | All rights reserved.</span>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 </script>
 </body>
 </html>

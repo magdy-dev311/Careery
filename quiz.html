@@ -8,21 +8,39 @@
   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <script src="app.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet" />
   <style>
-    :root{--brand:#6336c7;--brand-light:#8b5cf6;--brand-glow:rgba(99,54,199,0.18);}
-    *{box-sizing:border-box;margin:0;padding:0;}
-    body{font-family:'DM Sans',sans-serif;background:#f0eefc;min-height:100vh;color:#1a1033;}
-    .syne{font-family:'Syne',sans-serif;}
-    .card{background:#fff;border-radius:20px;box-shadow:0 8px 40px rgba(99,54,199,0.1);padding:32px;}
-    .option-card{transition:all .2s;border:2px solid #e5e7eb;background:#fff;cursor:pointer;border-radius:14px;padding:16px;margin-bottom:12px;}
-    .option-card:hover{border-color:var(--brand);}
-    .option-card.selected{border-color:var(--brand);background:linear-gradient(135deg,#ede9fe,#f5f3ff);}
-    .progress-fill{background:linear-gradient(90deg,var(--brand),var(--brand-light));border-radius:99px;transition:width .4s;}
-    .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-light));color:#fff;font-weight:700;border-radius:14px;padding:12px 28px;cursor:pointer;border:none;font-family:'Syne',sans-serif;box-shadow:0 4px 20px var(--brand-glow);}
-    .btn-primary:disabled{opacity:.4;cursor:not-allowed;}
-    .btn-secondary{background:#fff;color:#1a1033;font-weight:700;border-radius:14px;padding:12px 28px;cursor:pointer;border:2px solid #e5e7eb;font-family:'Syne',sans-serif;}
+    :root{--brand:#6336c7;--brand-light:#8b5cf6;--brand-glow:rgba(99,54,199,0.18);--bg:#f0eefc;--text:#1a1033;--muted:#6b7280;}
+    *{box-sizing:border-box;}
+    body{font-family:"DM Sans",sans-serif;background:var(--bg);min-height:100vh;color:var(--text);}
+    body.arabic{font-family:"Tajawal",sans-serif;}
+    .syne{font-family:"Syne",sans-serif;}
+    body.arabic .syne{font-family:"Tajawal",sans-serif;font-weight:800;}
+    .bg-blob{position:fixed;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(139,92,246,0.15) 0%,transparent 70%);border-radius:50%;pointer-events:none;z-index:0;animation:blobPulse 8s ease-in-out infinite;}
+    .bg-blob-2{position:fixed;bottom:-150px;left:-150px;width:500px;height:500px;background:radial-gradient(circle,rgba(244,114,182,0.10) 0%,transparent 70%);border-radius:50%;pointer-events:none;z-index:0;animation:blobPulse 10s ease-in-out infinite reverse;}
+    @keyframes blobPulse{0%,100%{transform:scale(1) translate(0,0);}50%{transform:scale(1.1) translate(20px,-20px);}}
+    .option-card{transition:all 0.2s cubic-bezier(.4,0,.2,1);border:2px solid #e5e7eb;background:white;cursor:pointer;}
+    .option-card:hover{border-color:var(--brand);transform:translateY(-1px);box-shadow:0 4px 20px var(--brand-glow);}
+    .option-card.selected{border-color:var(--brand);background:linear-gradient(135deg,#ede9fe,#f5f3ff);box-shadow:0 4px 24px var(--brand-glow);transform:translateY(-1px);}
+    .progress-fill{background:linear-gradient(90deg,var(--brand),var(--brand-light));transition:width 0.5s cubic-bezier(.4,0,.2,1);border-radius:99px;}
+    .slide-in{animation:slideIn 0.35s cubic-bezier(.4,0,.2,1) forwards;}
+    @keyframes slideIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+    .slide-out{animation:slideOut 0.25s cubic-bezier(.4,0,.2,1) forwards;}
+    @keyframes slideOut{from{opacity:1;transform:translateX(0);}to{opacity:0;transform:translateX(-30px);}}
+    .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-light));color:white;font-weight:700;border-radius:14px;padding:13px 28px;cursor:pointer;transition:all 0.2s;font-family:"Syne",sans-serif;border:none;box-shadow:0 4px 20px var(--brand-glow);}
+    body.arabic .btn-primary,body.arabic .btn-secondary{font-family:"Tajawal",sans-serif;font-weight:700;}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px var(--brand-glow);}
+    .btn-primary:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
+    .btn-secondary{background:white;color:var(--text);font-weight:600;border-radius:14px;padding:13px 28px;cursor:pointer;border:2px solid #e5e7eb;transition:all 0.2s;font-family:"Syne",sans-serif;}
+    .btn-secondary:hover{border-color:var(--brand);background:#faf8ff;}
+    .btn-secondary:disabled{opacity:0.4;cursor:not-allowed;}
+    .lang-toggle{display:flex;background:#f3f4f6;border-radius:10px;padding:3px;}
+    .lang-btn{padding:6px 14px;border-radius:8px;border:none;cursor:pointer;font-weight:700;font-size:13px;transition:all 0.2s;background:transparent;color:var(--muted);}
+    .lang-btn.active{background:white;color:var(--brand);box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+    .r-prog{border:2px solid #c4b5fd;background:linear-gradient(135deg,#f5f3ff,#ede9fe);}
+    .r-net{border:2px solid #a7f3d0;background:linear-gradient(135deg,#f0fdf4,#dcfce7);}
+    .r-comm{border:2px solid #fed7aa;background:linear-gradient(135deg,#fff7ed,#ffedd5);}
+    @media(max-width:640px){.btn-primary,.btn-secondary{padding:11px 18px;font-size:14px;}}
   </style>
 </head>
 <body>
@@ -30,87 +48,281 @@
 <script type="text/babel">
 const {useState,useEffect} = React;
 
-// answer index: 0 = Programming, 1 = Networking, 2 = Communications
-const QUESTIONS=[
-  {q:"What sparks your curiosity most when using your smartphone?",o:["How the apps and interfaces I interact with were built","How the phone connects to the internet and accesses my data securely","How the signal travels from the cell tower to my phone at ultra-high speeds"]},
-  {q:"If you had to solve a technical problem, which challenge would you prefer?",o:["Searching for a bug in the code that prevents a program from executing a command","Fixing a sudden connection drop in a company's internal servers","Improving data transmission quality and reducing interference in wireless waves"]},
-  {q:"Which of these terms are you most eager to learn about?",o:["Algorithms, AI, and languages like Python and Java","Internet Protocols (IP), Firewalls, and VPNs","Satellites, 6G networks, and Fiber Optics"]},
-  {q:"How do you imagine your ideal work environment?",o:["Working behind a screen anywhere to build software systems","Managing a Server Room and connecting devices","Field/engineering work on transmission towers"]},
-  {q:"What superpower would you like to have?",o:["Turn any innovative idea into an app used by millions","Build a digital fortress that protects company data","Connect remote areas to the world via satellite"]},
-  {q:"In the world of Self-Driving Cars, what interests you most?",o:["The software/AI that makes driving decisions","The system that connects cars into a network","The radar/wave tech that lets the car see the road"]},
-  {q:"What kind of tools would you prefer to use in your work?",o:["Code editors (like VS Code)","Routers, switches, monitoring tools","Frequency meters, antennas, transmission equipment"]},
-  {q:"What is your ultimate goal in studying technology?",o:["Innovate smart software solutions","Keep the world digitally connected securely","Develop next-gen data transmission tech"]},
-  {q:"When you hear about Cybersecurity, what comes to mind?",o:["Writing secure code that can't be exploited","Protecting internal networks from intrusion","Encrypting wireless communication"]},
-  {q:"Which subject do you think would be most enjoyable for you?",o:["Data Structures","Network Architecture & IP routing","Field Theory & electromagnetic waves"]},
+const QEN=[
+  {id:1,q:"What sparks your curiosity most when using your smartphone?",o:["How the apps and interfaces I interact with were built","How the phone connects to the internet and accesses my data securely","How the signal travels from the cell tower to my phone at ultra-high speeds"]},
+  {id:2,q:"If you had to solve a technical problem, which challenge would you prefer?",o:["Searching for a bug in the code that prevents a program from executing a command","Fixing a sudden connection drop in a company's internal servers","Improving data transmission quality and reducing interference in wireless waves"]},
+  {id:3,q:"Which of these terms are you most eager to learn about?",o:["Algorithms, Artificial Intelligence, and languages like Python and Java","Internet Protocols (IP), Firewalls, and VPNs","Satellites, 6G networks, and Fiber Optics"]},
+  {id:4,q:"How do you imagine your ideal work environment?",o:["Working behind a screen anywhere (even from home) to build software systems","Managing a Server Room and ensuring all devices are interconnected","Field or engineering work designing and installing transmission towers"]},
+  {id:5,q:"What superpower would you like to have?",o:["The ability to turn any innovative idea into a tangible app used by millions","The ability to build a digital fortress that protects an entire company's data from hacking","The ability to connect remote areas to the world through broadcasting and satellite technology"]},
+  {id:6,q:"In the world of Self-Driving Cars, what interests you most?",o:["The software and AI that enable the car to make driving decisions","The system that connects cars into a single network to avoid accidents","The radar and wave technology that allows the car to see the road accurately"]},
+  {id:7,q:"What kind of tools would you prefer to use in your work?",o:["Code editors (like VS Code) to develop systems","Physical hardware like routers, switches, and data flow monitoring tools","Frequency meters, Antennas, and transmission equipment"]},
+  {id:8,q:"What is your ultimate goal in studying technology?",o:["To innovate smart software solutions that simplify people's daily lives","To ensure the world remains digitally connected securely and without interruption","To develop the next generation of data transmission technology (faster, stronger, further)"]},
+  {id:9,q:"When you hear about Cybersecurity, what comes to mind?",o:["Writing secure code that cannot be exploited by hackers","Protecting internal networks and preventing unauthorized access to devices","Encrypting communication waves to prevent eavesdropping on wireless data"]},
+  {id:10,q:"Which subject do you think would be most enjoyable for you?",o:["Data Structures and how to organize information programmatically","Network Architecture and how to distribute IP addresses and route data","Field Theory and how electromagnetic waves propagate in space"]}
 ];
 
-function QuizPage(){
-  const [step,setStep]=useState(0);
-  const [answers,setAnswers]=useState(Array(QUESTIONS.length).fill(null));
-  const [submitting,setSubmitting]=useState(false);
+const QAR=[
+  {id:1,q:"ما هو الشيء الذي يثير فضولك أكثر عندما تمسك بهاتفك؟",o:["كيف تم بناء التطبيقات والواجهات التي أتفاعل معها؟","كيف يتصل الهاتف بالإنترنت ويصل إلى بياناتي بأمان؟","كيف تنتقل الإشارة من برج الاتصالات إلى هاتفي بسرعة فائقة؟"]},
+  {id:2,q:"إذا أردت حل مشكلة تقنية، أي نوع من التحديات تفضل؟",o:["البحث عن خطأ في الكود يمنع البرنامج من تنفيذ أمر معين","إصلاح انقطاع مفاجئ في اتصال السيرفرات داخل الشركة","تحسين جودة إرسال البيانات وتقليل التشويش في الموجات اللاسلكية"]},
+  {id:3,q:"أي من هذه المصطلحات تشعر برغبة أكبر في تعلم تفاصيلها؟",o:["الخوارزميات، الذكاء الاصطناعي، ولغات مثل Python وJava","بروتوكولات الإنترنت (IP)، الجدران النارية (Firewalls)، والـ VPN","الأقمار الصناعية، شبكات الجيل السادس (6G)، والألياف الضوئية"]},
+  {id:4,q:"كيف تتخيل بيئة عملك المثالية؟",o:["العمل خلف الشاشة في أي مكان (حتى من المنزل) لبناء أنظمة برمجية","إدارة غرفة السيرفرات والتأكد من ترابط أجهزة المؤسسة ببعضها","العمل الميداني أو الهندسي لتصميم وتركيب أبراج الإرسال ومعدات النقل"]},
+  {id:5,q:"ما هي القوة العظيمة التي تود امتلاكها؟",o:["القدرة على تحويل أي فكرة مبتكرة إلى تطبيق ملموس يستخدمه الملايين","القدرة على بناء حصن رقمي يحمي بيانات شركة كاملة من الاختراق","القدرة على ربط المناطق النائية بالعالم عبر تقنيات البث والاتصال الفضائي"]},
+  {id:6,q:"في عالم السيارات ذاتية القيادة، ما الذي يهمك أكثر؟",o:["البرمجيات والذكاء الاصطناعي الذي يجعل السيارة تتخذ قرارات القيادة","النظام الذي يربط السيارات ببعضها في شبكة واحدة لتفادي الحوادث","تكنولوجيا الرادار والموجات التي تسمح للسيارة برؤية الطريق بدقة"]},
+  {id:7,q:"أي نوع من الأدوات تفضل استخدامه في عملك؟",o:["برامج تحرير الأكواد (مثل VS Code) لتطوير الأنظمة","أجهزة مادية مثل الراوترات والسويتشات وأدوات مراقبة تدفق البيانات","أجهزة قياس الترددات، الهوائيات (Antennas)، ومعدات الإرسال"]},
+  {id:8,q:"ما هو هدفك النهائي من دراسة التكنولوجيا؟",o:["ابتكار حلول برمجية ذكية تسهل حياة الناس اليومية","ضمان بقاء العالم متصلا رقميا بأمان وبدون انقطاع","تطوير الجيل القادم من تكنولوجيا نقل المعلومات (أسرع، أقوى، وأبعد)"]},
+  {id:9,q:"عندما تسمع عن الأمن السيبراني، ما الذي يخطر ببالك؟",o:["كتابة أكواد محمية لا يمكن استغلالها من قبل القراصنة","حماية الشبكات الداخلية ومنع الدخول غير المصرح به للأجهزة","تشفير موجات الاتصال لمنع التجسس على المكالمات أو البيانات اللاسلكية"]},
+  {id:10,q:"أي مادة دراسية تظن أنها ستكون أكثر متعة بالنسبة لك؟",o:["هياكل البيانات وكيفية تنظيم المعلومات برمجيا","بنية الشبكات وكيفية توزيع عناوين الـ IP وتوجيه البيانات","نظرية المجالات وكيفية انتشار الموجات الكهرومغناطيسية في الفضاء"]}
+];
 
-  useEffect(()=>{ requireAuth(); },[]);
+const CATS=["programming","networking","communications"];
+const META={
+  programming:{
+    en:{label:"Programming",desc:"You love logic, building systems, and creating digital solutions. Your future is in software development and AI.",icon:"\u{1F4BB}",color:"#6336c7",cls:"r-prog"},
+    ar:{label:"\u0627\u0644\u0628\u0631\u0645\u062c\u0629",desc:"\u0623\u0646\u062a \u062a\u062d\u0628 \u0627\u0644\u0645\u0646\u0637\u0642 \u0648\u0628\u0646\u0627\u0621 \u0627\u0644\u0623\u0646\u0638\u0645\u0629 \u0648\u0627\u0644\u062d\u0644\u0648\u0644 \u0627\u0644\u0631\u0642\u0645\u064a\u0629. \u0645\u0633\u062a\u0642\u0628\u0644\u0643 \u0641\u064a \u062a\u0637\u0648\u064a\u0631 \u0627\u0644\u0628\u0631\u0645\u062c\u064a\u0627\u062a \u0648\u0627\u0644\u0630\u0643\u0627\u0621 \u0627\u0644\u0627\u0635\u0637\u0646\u0627\u0639\u064a.",icon:"\u{1F4BB}",color:"#6336c7",cls:"r-prog"}
+  },
+  networking:{
+    en:{label:"Networking",desc:"You care about infrastructure, device connectivity, and digital security. Network engineering is your calling.",icon:"\u{1F310}",color:"#16a34a",cls:"r-net"},
+    ar:{label:"\u0627\u0644\u0634\u0628\u0643\u0627\u062a",desc:"\u0623\u0646\u062a \u062a\u0647\u062a\u0645 \u0628\u0627\u0644\u0628\u0646\u064a\u0629 \u0627\u0644\u062a\u062d\u062a\u064a\u0629\u060c \u0627\u0644\u0631\u0628\u0637 \u0628\u064a\u0646 \u0627\u0644\u0623\u062c\u0647\u0632\u0629\u060c \u0648\u0627\u0644\u0623\u0645\u0627\u0646 \u0627\u0644\u0631\u0642\u0645\u064a. \u0647\u0646\u062f\u0633\u0629 \u0627\u0644\u0634\u0628\u0643\u0627\u062a \u0647\u064a \u0645\u0633\u0627\u0631\u0643.",icon:"\u{1F310}",color:"#16a34a",cls:"r-net"}
+  },
+  communications:{
+    en:{label:"Communications",desc:"You're fascinated by wireless tech, satellites, and next-gen transmission. Telecom engineering is your world.",icon:"\u{1F4E1}",color:"#ea580c",cls:"r-comm"},
+    ar:{label:"\u0627\u0644\u0627\u062a\u0635\u0627\u0644\u0627\u062a",desc:"\u0623\u0646\u062a \u0645\u0641\u062a\u0648\u0646 \u0628\u0627\u0644\u062a\u0642\u0646\u064a\u0627\u062a \u0627\u0644\u0644\u0627\u0633\u0644\u0643\u064a\u0629 \u0648\u0627\u0644\u0623\u0642\u0645\u0627\u0631 \u0627\u0644\u0635\u0646\u0627\u0639\u064a\u0629 \u0648\u0633\u0631\u0639\u0627\u062a \u0627\u0644\u0625\u0631\u0633\u0627\u0644. \u0647\u0646\u062f\u0633\u0629 \u0627\u0644\u0627\u062a\u0635\u0627\u0644\u0627\u062a \u0647\u064a \u0639\u0627\u0644\u0645\u0643.",icon:"\u{1F4E1}",color:"#ea580c",cls:"r-comm"}
+  }
+};
 
-  const select=(idx)=>{
-    const copy=[...answers];
-    copy[step]=idx;
-    setAnswers(copy);
-  };
+const T={
+  en:{s1:"Explore",s2:"Quiz",s3:"Roadmap",sl:(i)=>`Step ${i+1}`,qof:(c,t)=>`Question ${c} of ${t}`,hint:"Choose an answer to continue",bk:"Back",nx:"Next",fn:"See My Results",res:"Your Best Match",bd:"Score Breakdown",rt:"Retake Quiz",rm:"View My Roadmap",ft:"2026 Careery | All rights reserved.",dir:"ltr",ans:["A","B","C"],bf:"BEST FIT"},
+  ar:{s1:"\u0627\u0633\u062a\u0643\u0634\u0641",s2:"\u0627\u0644\u0627\u062e\u062a\u0628\u0627\u0631",s3:"\u062e\u0627\u0631\u0637\u0629 \u0627\u0644\u0637\u0631\u064a\u0642",sl:(i)=>`${i+1} \u0627\u0644\u062e\u0637\u0648\u0629`,qof:(c,t)=>`\u0627\u0644\u0633\u0624\u0627\u0644 ${c} \u0645\u0646 ${t}`,hint:"\u0627\u062e\u062a\u0631 \u0625\u062c\u0627\u0628\u062a\u0643 \u0644\u0644\u0645\u062a\u0627\u0628\u0639\u0629",bk:"\u0631\u062c\u0648\u0639",nx:"\u0627\u0644\u062a\u0627\u0644\u064a",fn:"\u0627\u0639\u0631\u0641 \u0646\u062a\u064a\u062c\u062a\u064a",res:"\u0627\u0644\u062a\u062e\u0635\u0635 \u0627\u0644\u0623\u0646\u0633\u0628 \u0644\u0643",bd:"\u062a\u0648\u0632\u064a\u0639 \u0627\u0644\u0646\u062a\u0627\u0626\u062c",rt:"\u0625\u0639\u0627\u062f\u0629 \u0627\u0644\u0627\u062e\u062a\u0628\u0627\u0631",rm:"\u062e\u0627\u0631\u0637\u0629 \u0637\u0631\u064a\u0642\u064a",ft:"2026 Careery | \u062c\u0645\u064a\u0639 \u0627\u0644\u062d\u0642\u0648\u0642 \u0645\u062d\u0641\u0648\u0638\u0629.",dir:"rtl",ans:["\u0623","\u0628","\u062c"],bf:"\u0627\u0644\u0623\u0646\u0633\u0628 \u0644\u0643 \u2605"}
+};
 
-  const next=async()=>{
-    if(step < QUESTIONS.length-1){
-      setStep(step+1);
-    } else {
-      setSubmitting(true);
-      const res = await apiFetch("/quiz/submit",{ method:"POST", body: JSON.stringify({answers}) });
-      if(res){
-        const data = await res.json();
-        const user = getUser();
-        user.quizCompleted = true;
-        user.recommendedField = data.recommendedField;
-        localStorage.setItem("user", JSON.stringify(user));
-        window.location.href = "roadmap.html";
-      }
-      setSubmitting(false);
-    }
-  };
-
-  const back=()=> step>0 && setStep(step-1);
-
-  const q = QUESTIONS[step];
-  const progress = ((step+1)/QUESTIONS.length)*100;
-
-  return (
-    <div style={{ minHeight:'100vh', display:'flex', alignItems:'center', justifyContent:'center', padding:16 }}>
-      <div className="card" style={{ width:'100%', maxWidth:560 }}>
-        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:8 }}>
-          <span className="syne" style={{ fontWeight:800, color:'var(--brand)' }}>Careery Quiz</span>
-          <span style={{ fontSize:13, color:'#6b7280' }}>{`Question ${step+1} of ${QUESTIONS.length}`}</span>
-        </div>
-        <div style={{ height:8, background:'#f3f4f6', borderRadius:99, marginBottom:24, overflow:'hidden' }}>
-          <div className="progress-fill" style={{ width:`${progress}%`, height:'100%' }} />
-        </div>
-
-        <h2 className="syne" style={{ fontSize:20, fontWeight:800, marginBottom:20 }}>{q.q}</h2>
-
-        {q.o.map((opt,i)=>(
-          <div key={i} className={`option-card ${answers[step]===i?"selected":""}`} onClick={()=>select(i)}>
-            {opt}
+function Stepper({active,lang}){
+  const t=T[lang];
+  const steps=[{l:t.s1,i:"\uD83D\uDD0D"},{l:t.s2,i:"\uD83D\uDCCB"},{l:t.s3,i:"\uD83D\uDDFA\uFE0F"}];
+  return(
+    <div style={{position:"relative",marginBottom:44,marginTop:8}}>
+      <div style={{position:"absolute",top:20,left:"10%",right:"10%",height:2,background:"#e5e7eb",zIndex:0}}/>
+      <div style={{display:"flex",justifyContent:"space-between",position:"relative",zIndex:1}}>
+        {steps.map((s,i)=>(
+          <div key={i} style={{display:"flex",flexDirection:"column",alignItems:"center",gap:8,width:100}}>
+            <div style={{width:40,height:40,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:16,
+              background:i===active?"linear-gradient(135deg,#6336c7,#8b5cf6)":"white",
+              border:`2px solid ${i===active?"#6336c7":"#e5e7eb"}`,
+              color:i===active?"white":"#9ca3af",
+              boxShadow:i===active?"0 4px 16px rgba(99,54,199,0.25)":"none",transition:"all 0.3s"}}>
+              {s.i}
+            </div>
+            <span style={{fontSize:"9px",color:i===active?"#6336c7":"#9ca3af",fontWeight:700,textTransform:"uppercase",letterSpacing:"0.05em",textAlign:"center"}}>
+              {t.sl(i)}: {s.l}
+            </span>
           </div>
         ))}
-
-        <div style={{ display:'flex', justifyContent:'space-between', marginTop:20 }}>
-          <button className="btn-secondary" onClick={back} disabled={step===0}>Back</button>
-          <button className="btn-primary" onClick={next} disabled={answers[step]===null || submitting}>
-            {submitting ? "..." : step===QUESTIONS.length-1 ? "See My Results" : "Next"}
-          </button>
-        </div>
       </div>
     </div>
   );
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(<QuizPage/>);
+function ResultScreen({answers,onRetry,lang,total}){
+  const t=T[lang];
+  const counts={programming:0,networking:0,communications:0};
+  answers.forEach((a)=>{const c=CATS[a];if(c)counts[c]++;});
+  const sorted=Object.entries(counts).sort((a,b)=>b[1]-a[1]);
+  const winner=sorted[0][0];
+  const wm=META[winner][lang];
+  const isRTL=lang==="ar";
+
+  // Save specialization to localStorage so roadmap.html can read it
+  React.useEffect(()=>{
+    try{localStorage.setItem("careery_specialization",winner);}catch(e){}
+  },[winner]);
+
+  return(
+    <div className="slide-in" dir={t.dir}>
+      <div style={{borderRadius:24,padding:"clamp(24px,6vw,44px)",marginBottom:18,textAlign:"center",
+        background:"linear-gradient(135deg,#6336c7,#8b5cf6)",color:"white",boxShadow:"0 8px 40px rgba(99,54,199,0.3)"}}>
+        <div style={{fontSize:52,marginBottom:10}}>{wm.icon}</div>
+        <p style={{fontSize:11,fontWeight:700,opacity:0.75,marginBottom:8,letterSpacing:"0.08em",textTransform:"uppercase"}}>{t.res}</p>
+        <h2 className="syne" style={{fontSize:"clamp(26px,6vw,42px)",fontWeight:800,marginBottom:12}}>{wm.label}</h2>
+        <p style={{fontSize:14,opacity:0.92,maxWidth:460,margin:"0 auto",lineHeight:1.8}}>{wm.desc}</p>
+      </div>
+
+      <div style={{background:"white",borderRadius:24,padding:"clamp(18px,5vw,32px)",marginBottom:18,
+        boxShadow:"0 4px 40px rgba(99,54,199,0.07)",border:"1px solid #f0eefe"}}>
+        <h3 className="syne" style={{fontSize:16,fontWeight:700,color:"var(--text)",marginBottom:14}}>{t.bd}</h3>
+        <div style={{display:"flex",flexDirection:"column",gap:11}}>
+          {sorted.map(([cat,count])=>{
+            const m=META[cat][lang];
+            const pct=Math.round((count/total)*100);
+            const isW=cat===winner;
+            return(
+              <div key={cat} className={m.cls} style={{borderRadius:14,padding:16,
+                transform:isW?"scale(1.02)":"scale(1)",
+                boxShadow:isW?"0 4px 18px rgba(99,54,199,0.12)":"none",transition:"all 0.3s"}}>
+                <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10}}>
+                  <div style={{display:"flex",alignItems:"center",gap:10}}>
+                    <span style={{fontSize:20}}>{m.icon}</span>
+                    <span style={{fontWeight:700,fontSize:14,color:"var(--text)"}}>{m.label}</span>
+                    {isW&&<span style={{fontSize:10,fontWeight:700,padding:"2px 9px",borderRadius:99,background:m.color,color:"white"}}>{t.bf}</span>}
+                  </div>
+                  <span className="syne" style={{fontWeight:800,fontSize:19,color:m.color}}>{count}/{total}</span>
+                </div>
+                <div style={{height:8,borderRadius:99,background:"rgba(0,0,0,0.08)",overflow:"hidden"}}>
+                  <div style={{width:`${pct}%`,height:"100%",borderRadius:99,
+                    background:`linear-gradient(90deg,${m.color},${m.color}aa)`,transition:"width 1s cubic-bezier(.4,0,.2,1)"}}/>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div style={{display:"flex",flexDirection:"column",gap:10,alignItems:"center"}}>
+        <button className="btn-secondary" onClick={onRetry} style={{width:"100%",maxWidth:340}}>{t.rt}</button>
+        <button className="btn-primary" style={{width:"100%",maxWidth:340}} onClick={()=>{
+          try{localStorage.setItem("careery_specialization",winner);}catch(e){}
+          window.location.href="roadmap.html?spec="+winner;
+        }}>{t.rm}</button>
+      </div>
+    </div>
+  );
+}
+
+function QuizApp(){
+  const [lang,setLang]=useState("en");
+  const [cur,setCur]=useState(0);
+  const [sel,setSel]=useState(null);
+  const [ans,setAns]=useState([]);
+  const [done,setDone]=useState(false);
+  const [anim,setAnim]=useState(false);
+  const Q=lang==="ar"?QAR:QEN;
+  const t=T[lang];
+
+  useEffect(()=>{
+    document.body.classList.toggle("arabic",lang==="ar");
+    document.documentElement.lang=lang;
+  },[lang]);
+
+  const q=Q[cur];
+  const prog=Math.round((cur/Q.length)*100);
+
+  function pick(i){if(sel!==null)return;setSel(i);}
+  function goNext(){
+    if(sel===null)return;
+    const na=[...ans,sel];
+    setAnim(true);
+    setTimeout(()=>{
+      setAns(na);
+      if(cur+1>=Q.length)setDone(true);
+      else{setCur(cur+1);setSel(null);}
+      setAnim(false);
+    },250);
+  }
+  function goBack(){
+    if(cur===0)return;
+    setAnim(true);
+    setTimeout(()=>{
+      const p=ans[cur-1];
+      setCur(cur-1);
+      setSel(p!==undefined?p:null);
+      setAns(ans.slice(0,cur-1));
+      setAnim(false);
+    },250);
+  }
+  function retry(){setCur(0);setSel(null);setAns([]);setDone(false);}
+  function swLang(l){setLang(l);setCur(0);setSel(null);setAns([]);setDone(false);}
+
+  return(
+    <div style={{minHeight:"100vh",background:"var(--bg)"}}>
+      <div className="bg-blob"/><div className="bg-blob-2"/>
+      <header style={{background:"white",borderBottom:"1px solid #f1f0fe",position:"sticky",top:0,zIndex:50}}>
+        <div style={{maxWidth:1024,margin:"0 auto",padding:"0 20px",height:60,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+          <span className="syne" style={{fontSize:20,fontWeight:800,color:"#6336c7"}}>Careery</span>
+          <div style={{display:"flex",alignItems:"center",gap:12}}>
+            <div className="lang-toggle">
+              <button className={`lang-btn ${lang==="en"?"active":""}`} onClick={()=>swLang("en")}>EN</button>
+              <button className={`lang-btn ${lang==="ar"?"active":""}`} onClick={()=>swLang("ar")}>عربي</button>
+            </div>
+            <div style={{width:36,height:36,borderRadius:"50%",background:"linear-gradient(135deg,#6336c7,#8b5cf6)",display:"flex",alignItems:"center",justifyContent:"center",color:"white",fontSize:13,fontWeight:700}}>MZ</div>
+          </div>
+        </div>
+      </header>
+
+      <main style={{maxWidth:700,margin:"0 auto",padding:"30px 16px 48px",position:"relative",zIndex:1}} dir={t.dir}>
+        <Stepper active={1} lang={lang}/>
+        {!done?(
+          <>
+            <div style={{marginBottom:20}}>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
+                <span className="syne" style={{fontSize:14,fontWeight:700,color:"var(--text)"}}>{t.qof(cur+1,Q.length)}</span>
+                <span style={{fontWeight:700,fontSize:13,color:"#6336c7"}}>{prog}%</span>
+              </div>
+              <div style={{height:8,borderRadius:99,background:"#e5e7eb",overflow:"hidden"}}>
+                <div className="progress-fill" style={{width:`${prog}%`,height:"100%"}}/>
+              </div>
+            </div>
+
+            <div className={anim?"slide-out":"slide-in"} style={{background:"white",borderRadius:22,padding:"clamp(20px,5vw,40px)",boxShadow:"0 4px 40px rgba(99,54,199,0.07)",border:"1px solid #f0eefe",marginBottom:16}}>
+              <div style={{marginBottom:12}}>
+                <span style={{padding:"3px 11px",borderRadius:99,background:"#ede9fe",color:"#6336c7",fontSize:11,fontWeight:700,letterSpacing:"0.05em",textTransform:"uppercase"}}>
+                  {lang==="ar"?`${cur+1} \u0627\u0644\u0633\u0624\u0627\u0644`:`Q${cur+1}`}
+                </span>
+              </div>
+              <h2 className="syne" style={{fontSize:"clamp(16px,3vw,22px)",fontWeight:700,color:"var(--text)",lineHeight:1.55,marginBottom:24,textAlign:lang==="ar"?"right":"left"}}>
+                {q.q}
+              </h2>
+              <div style={{display:"flex",flexDirection:"column",gap:10}}>
+                {q.o.map((opt,i)=>{
+                  const isSel=i===sel;
+                  return(
+                    <div key={i} className={`option-card ${isSel?"selected":""}`}
+                      onClick={()=>pick(i)} role="button" tabIndex={0} onKeyDown={e=>e.key==="Enter"&&pick(i)}
+                      style={{borderRadius:14,padding:"12px 16px",display:"flex",alignItems:"center",gap:12,
+                        flexDirection:lang==="ar"?"row-reverse":"row"}}>
+                      <span style={{width:32,height:32,borderRadius:8,flexShrink:0,
+                        background:isSel?"#ede9fe":"#f3f4f6",color:isSel?"#6336c7":"#9ca3af",
+                        display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,fontWeight:700,transition:"all 0.2s"}}>
+                        {t.ans[i]}
+                      </span>
+                      <span style={{fontWeight:500,fontSize:14,color:"var(--text)",flex:1,textAlign:lang==="ar"?"right":"left",lineHeight:1.5}}>
+                        {opt}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+              {sel===null&&<p style={{fontSize:12,color:"var(--muted)",textAlign:"center",marginTop:14,fontStyle:"italic"}}>{t.hint}</p>}
+            </div>
+
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:10}}>
+              <button className="btn-secondary" onClick={goBack} disabled={cur===0}>
+                {lang==="ar"?"\u2190 "+t.bk:"\u2190 "+t.bk}
+              </button>
+              <div style={{display:"flex",gap:5}}>
+                {Q.map((_,i)=>(
+                  <div key={i} style={{width:i===cur?18:7,height:7,borderRadius:99,
+                    background:i<ans.length?"#6336c7":i===cur?"#8b5cf6":"#e5e7eb",transition:"all 0.3s"}}/>
+                ))}
+              </div>
+              <button className="btn-primary" onClick={goNext} disabled={sel===null}>
+                {cur+1===Q.length?("\uD83C\uDF89 "+t.fn):(t.nx+" \u2192")}
+              </button>
+            </div>
+          </>
+        ):(
+          <ResultScreen answers={ans} onRetry={retry} lang={lang} total={Q.length}/>
+        )}
+      </main>
+
+      <footer style={{background:"white",borderTop:"1px solid #f1f0fe",padding:18,marginTop:40}}>
+        <div style={{maxWidth:1024,margin:"0 auto",display:"flex",justifyContent:"space-between",alignItems:"center",color:"var(--muted)",fontSize:13}}>
+          <span className="syne" style={{color:"var(--text)",fontSize:15,fontWeight:700}}>Careery</span>
+          <span> &copy;{t.ft}</span>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<QuizApp/>);
 </script>
 </body>
 </html>
