@@ -11,6 +11,7 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap"
         rel="stylesheet" />
+    <script src="app.js"></script>
     <style>
         :root {
             --brand: #6336c7;
@@ -292,7 +293,7 @@
                             <a href="#features" style={{ fontSize: 14, fontWeight: 600, color: '#4b5563' }}>Features</a>
                             <a href="#journey" style={{ fontSize: 14, fontWeight: 600, color: '#4b5563' }}>How it works</a>
                             <a href="career-path.html" style={{ fontSize: 14, fontWeight: 600, color: '#4b5563' }}>Career Path</a>
-                            <a href="explore.html" className="btn-primary" style={{ padding: '10px 24px', fontSize: 14 }}>Get Started</a>
+                            <a href="#" onClick={e=>{e.preventDefault();goGetStarted()}} className="btn-primary" style={{ padding: '10px 24px', fontSize: 14 }}>Get Started</a>
                         </div>
                         {/* Mobile hamburger */}
                         <button onClick={() => setMenuOpen(!menuOpen)} style={{ display: 'none', background: 'none', border: 'none', cursor: 'pointer', padding: 8 }} className="show-mobile">
@@ -306,7 +307,7 @@
                             <a href="#features" style={{ fontWeight: 600, color: '#4b5563', fontSize: 15 }} onClick={() => setMenuOpen(false)}>Features</a>
                             <a href="#journey" style={{ fontWeight: 600, color: '#4b5563', fontSize: 15 }} onClick={() => setMenuOpen(false)}>How it works</a>
                             <a href="career-path.html" style={{ fontWeight: 600, color: '#4b5563', fontSize: 15 }} onClick={() => setMenuOpen(false)}>Career Path</a>
-                            <a href="explore.html" className="btn-primary" style={{ textAlign: 'center', fontSize: 15 }}>Get Started</a>
+                            <a href="#" onClick={e=>{e.preventDefault();goGetStarted()}} className="btn-primary" style={{ textAlign: 'center', fontSize: 15 }}>Get Started</a>
                         </div>
                     )}
                 </nav>
@@ -329,7 +330,7 @@
                                 Discover your path, build skills, and unlock opportunities with our personalized career intelligence platform.
                             </p>
                             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
-                                <a href="explore.html" className="btn-primary">Get Started →</a>
+                                <a href="#" onClick={e=>{e.preventDefault();goGetStarted()}} className="btn-primary">Get Started →</a>
                                 <a href="career-path.html" className="btn-outline">Explore Careers</a>
                             </div>
                             <div style={{ marginTop: 48, display: 'flex', gap: 32, flexWrap: 'wrap' }}>
@@ -414,7 +415,7 @@
                                 </div>
                             ))}
                             <div style={{ marginTop: 40 }}>
-                                <a href="explore.html" className="btn-primary">Start Your Journey →</a>
+                                <a href="#" onClick={e=>{e.preventDefault();goGetStarted()}} className="btn-primary">Start Your Journey →</a>
                             </div>
                         </div>
                     </div>
@@ -459,7 +460,7 @@
                     <div style={{ position: 'relative', zIndex: 1 }}>
                         <h2 className="syne" style={{ fontSize: 'clamp(28px,4vw,48px)', fontWeight: 800, color: '#fff', marginBottom: 16 }}>Ready to build your future?</h2>
                         <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: 17, marginBottom: 40, maxWidth: 480, margin: '0 auto 40px' }}>Join thousands of professionals who found their path with Careery.</p>
-                        <a href="explore.html" style={{ background: '#fff', color: 'var(--brand)', fontWeight: 800, fontFamily: 'Syne,sans-serif', borderRadius: 14, padding: '16px 40px', fontSize: 16, display: 'inline-block', boxShadow: '0 8px 32px rgba(0,0,0,0.15)', transition: 'all 0.2s', textDecoration: 'none' }}>
+                        <a href="#" onClick={e=>{e.preventDefault();goGetStarted()}} style={{ background: '#fff', color: 'var(--brand)', fontWeight: 800, fontFamily: 'Syne,sans-serif', borderRadius: 14, padding: '16px 40px', fontSize: 16, display: 'inline-block', boxShadow: '0 8px 32px rgba(0,0,0,0.15)', transition: 'all 0.2s', textDecoration: 'none' }}>
                             Start for Free →
                         </a>
                     </div>
